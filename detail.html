@@ -44,12 +44,11 @@
 
 <footer id="foot"></footer>
 
-<script src="data.js"></script>
-<script src="structure.js"></script>
-<script src="analysis.js"></script>
-<script src="predictions.js"></script>
-<script src="news.js"></script>
-<script src="charts.js"></script>
+<script>
+// cache-bust every load so scheduled-scan updates always come through
+["data.js", "structure.js", "analysis.js", "predictions.js", "news.js", "charts.js"]
+  .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
+</script>
 <script>
 const key = new URLSearchParams(location.search).get("s");
 const s = STOCK_DATA[key], a = ANALYSIS[key], p = PREDICTIONS[key];
@@ -68,7 +67,11 @@ if (!s || !a || !p) {
 
   const last4 = s.candles.slice(-4);
   const pred = buildPrediction(p.baseClose, p);
-  document.getElementById("candles").innerHTML = candleChart(last4, pred);
+  const levels = [
+    { p: p.stop, label: "stop loss", color: RED },
+    { p: p.support, label: "support", color: GREEN },
+  ];
+  document.getElementById("candles").innerHTML = candleChart(last4, pred, levels);
   document.getElementById("vp").innerHTML = volumeProfileChart(s.profile, ch.last);
 
   const pats = detectPatterns(s.candles);

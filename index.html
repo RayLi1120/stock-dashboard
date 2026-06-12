@@ -29,13 +29,11 @@
 
 <footer>Data: Yahoo Finance (daily candles + 5d/15m volume profiles) · Indicators: MA5/MA20, volume vs 20-day avg, RSI(14) · Patterns &amp; predictions: Claude's interpretation, not financial advice · Auto-scan weekdays 08:00 / 14:00 / 20:00</footer>
 
-<script src="data.js"></script>
-<script src="analysis.js"></script>
-<script src="predictions.js"></script>
-<script src="news.js"></script>
-<script src="alerts.js"></script>
-<script src="scorecard.js"></script>
-<script src="charts.js"></script>
+<script>
+// cache-bust every load so scheduled-scan updates always come through
+["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "charts.js"]
+  .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
+</script>
 <script>
 document.getElementById("macro").textContent = "⚠ " + MACRO_NOTE;
 document.getElementById("sub").textContent =

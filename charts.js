@@ -106,11 +106,13 @@ function candleChartCard(candles, w = 620, h = 250) {
   return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">${out}</svg>`;
 }
 
-// Detail candlestick chart: `real` candles plus optional `pred` ghost candle (dashed).
-function candleChart(real, pred, w = 460, h = 300) {
+// Detail candlestick chart: `real` candles plus optional `pred` ghost candle (dashed)
+// and optional horizontal `levels` [{p, label, color}] (stop loss / support lines).
+function candleChart(real, pred, levels = [], w = 460, h = 300) {
   const all = real.slice();
   if (pred) all.push(pred);
-  const lo0 = Math.min(...all.map(c => c.l)), hi0 = Math.max(...all.map(c => c.h));
+  const lvlP = levels.filter(l => l && l.p != null).map(l => l.p);
+  const lo0 = Math.min(...all.map(c => c.l), ...lvlP), hi0 = Math.max(...all.map(c => c.h), ...lvlP);
   const pad = (hi0 - lo0) * 0.1 || 1;
   const lo = lo0 - pad, hi = hi0 + pad;
   const n = all.length;
@@ -136,6 +138,12 @@ function candleChart(real, pred, w = 460, h = 300) {
              fill="${fill}" stroke="${col}" stroke-width="1.5" ${dash}/>`;
     out += `<text x="${cx}" y="${h - 22}" text-anchor="middle" class="axis">${isPred ? "next?" : c.d}</text>`;
     if (isPred) out += `<text x="${cx}" y="${h - 6}" text-anchor="middle" class="axis pred-tag">guess</text>`;
+  });
+  levels.forEach(lv => {
+    if (!lv || lv.p == null) return;
+    const ly = y(lv.p);
+    out += `<line x1="0" x2="${w}" y1="${ly}" y2="${ly}" stroke="${lv.color}" stroke-width="1.5" stroke-dasharray="8 5" opacity="0.85"/>
+            <text x="4" y="${ly - 5}" class="axis" fill="${lv.color}" font-weight="650">${lv.label} ${fmt(lv.p)}</text>`;
   });
   return `<svg viewBox="0 0 ${w} ${h}">${out}</svg>`;
 }
