@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ray's Watchlist — Market Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>📈</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="page">
+  <div class="eyebrow">Market dashboard · auto-scanned 3× daily</div>
+  <h1>Ray's Watchlist</h1>
+  <div class="sub" id="sub"></div>
+  <div class="macro" id="macro"></div>
+  <div class="alertbox" id="alerts" hidden></div>
+  <details class="tape" id="tape" open>
+    <summary>Today's tape</summary>
+    <ul id="tapelist"></ul>
+  </details>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<section class="panel scoreboard" id="scoreboard">
+  <h2>Prediction scorecard</h2>
+  <div id="scorebody"></div>
+</section>
+
+<footer>Data: Yahoo Finance (daily candles + 5d/15m volume profiles) · Indicators: MA5/MA20, volume vs 20-day avg, RSI(14) · Patterns &amp; predictions: Claude's interpretation, not financial advice · Auto-scan weekdays 08:00 / 14:00 / 20:00</footer>
+
+<script src="data.js"></script>
+<script src="analysis.js"></script>
+<script src="predictions.js"></script>
+<script src="news.js"></script>
+<script src="alerts.js"></script>
+<script src="scorecard.js"></script>
+<script src="charts.js"></script>
+<script>
+document.getElementById("macro").textContent = "⚠ " + MACRO_NOTE;
+document.getElementById("sub").textContent =
+  "6 symbols from your TradingView watchlist · daily candles, last month · green = up, red = down · data updated " +
+  (typeof GENERATED_AT !== "undefined" ? GENERATED_AT : "—") + " (page reloads every 15 min)";
+
+// Alerts: show entries from the most recent alert batch.
+(() => {
+  const items = (ALERTS.items || []).slice(-8).reverse();
+  if (!items.length) return;
+  const box = document.getElementById("alerts");
+  box.hidden = false;
+  box.innerHTML = `<b>Alerts</b> <small>(${ALERTS.generated})</small>` + items.map(i =>
+    `<div class="alert-item ${i.level}"><span class="sym">${i.sym}</span> ${i.msg} <small>· ${i.d} · ${i.rule}</small></div>`).join("");
+})();
+
+document.getElementById("tapelist").innerHTML = (NEWS._tape || []).map(t =>
+  `<li><b>${t.d}</b> — ${t.url ? `<a href="${t.url}" target="_blank" rel="noopener">${t.t}</a>` : t.t}
+   <span class="read">${t.read}</span></li>`).join("");
+
+const ORDER = ["2344", "2337", "6770", "1307", "NVDA", "AAPL"];
+document.getElementById("grid").innerHTML = ORDER.map((key, idx) => {
+  const s = STOCK_DATA[key];
+  const ch = dayChange(s.candles);
+  const up = ch.abs >= 0;
+  const cls = up ? "up" : "down";
+  const sign = up ? "+" : "";
+  return `<a class="card" style="--i:${idx}" href="detail.html?s=${key}">
+    ${candleChartCard(s.candles)}
+    <div class="caption">
+      <span class="name">${key}<small>${s.label}</small></span>
+      <span>
+        <span class="price">${fmt(ch.last)}</span>
+        <span class="chg ${cls}">${sign}${ch.pct.toFixed(2)}%</span>
+      </span>
+    </div>
+    <div class="indis">${indicatorChips(s.candles)}</div>
+    ${patternBadges(s.candles)}
+  </a>`;
+}).join("");
+
+// Scorecard
+(() => {
+  const es = (SCORECARD.entries || []).slice().reverse();
+  const el = document.getElementById("scorebody");
+  if (!es.length) {
+    el.innerHTML = `<div class="sub">No grades yet — each scan grades my previous next-candle guesses once the next session's candle exists. First entries land after the next trading day.</div>`;
+    return;
+  }
+  const dirHits = es.filter(e => e.dirHit).length;
+  const rangeHits = es.filter(e => e.inRange).length;
+  el.innerHTML = `<div class="sub">Direction: <b>${dirHits}/${es.length}</b> hit (${(dirHits / es.length * 100).toFixed(0)}%) · Close inside guessed range: <b>${rangeHits}/${es.length}</b></div>
+  <table><tr><th>made</th><th>symbol</th><th>guess</th><th>pred close</th><th>actual</th><th>day %</th><th>dir</th><th>range</th></tr>` +
+  es.slice(0, 15).map(e => `<tr>
+    <td>${e.baseDate}</td><td>${e.sym}</td>
+    <td class="${e.predDir === "up" ? "up" : e.predDir === "down" ? "down" : ""}">${e.predDir}</td>
+    <td>${fmt(e.predC)}</td><td>${fmt(e.actualC)} <small>(${e.actualDate})</small></td>
+    <td class="${e.actualPct >= 0 ? "up" : "down"}">${e.actualPct >= 0 ? "+" : ""}${e.actualPct}%</td>
+    <td>${e.dirHit ? "✓" : "✗"}</td><td>${e.inRange ? "✓" : "✗"}</td>
+  </tr>`).join("") + `</table>`;
+})();
+
+// Pick up fresh data written by the scheduled scan.
+setTimeout(() => location.reload(), 15 * 60 * 1000);
+</script>
+</body>
+</html>

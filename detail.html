@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stock Detail</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>📈</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="back" href="index.html">← Back to dashboard</a>
+<div class="detail-head" id="head"></div>
+<div class="cols">
+  <div class="panel" style="--i:0">
+    <h2>Last 4 candles + next-candle read</h2>
+    <div class="chips-row" id="chips"></div>
+    <div class="chartrow">
+      <div class="main" id="candles"></div>
+      <div class="profile">
+        <div class="mini-h">Volume profile <small>(5d · 15m)</small></div>
+        <div id="vp"></div>
+      </div>
+    </div>
+    <div id="patterns"></div>
+    <div class="interp" id="interp"></div>
+  </div>
+  <div class="stack">
+    <div class="panel" style="--i:1">
+      <h2>Analysis</h2>
+      <ul class="points" id="points"></ul>
+    </div>
+    <div class="panel" style="--i:2">
+      <h2>News</h2>
+      <ul class="newslist" id="news"></ul>
+    </div>
+  </div>
+</div>
+<footer id="foot"></footer>
+
+<script src="data.js"></script>
+<script src="analysis.js"></script>
+<script src="predictions.js"></script>
+<script src="news.js"></script>
+<script src="charts.js"></script>
+<script>
+const key = new URLSearchParams(location.search).get("s");
+const s = STOCK_DATA[key], a = ANALYSIS[key], p = PREDICTIONS[key];
+if (!s || !a || !p) {
+  document.body.innerHTML = '<a class="back" href="index.html">← Back</a><p style="margin-top:20px">Unknown symbol.</p>';
+} else {
+  document.title = key + " — Detail";
+  const ch = dayChange(s.candles);
+  const up = ch.abs >= 0, cls = up ? "up" : "down", sign = up ? "+" : "";
+  document.getElementById("head").innerHTML =
+    `<h1>${key}</h1><span class="sub">${s.label}</span>
+     <span class="price">${fmt(ch.last)} <small style="color:var(--muted)">${s.currency}</small></span>
+     <span class="chg ${cls}">${sign}${fmt(ch.abs)} (${sign}${ch.pct.toFixed(2)}%)</span>`;
+
+  document.getElementById("chips").innerHTML = indicatorChips(s.candles);
+
+  const last4 = s.candles.slice(-4);
+  const pred = buildPrediction(p.baseClose, p);
+  document.getElementById("candles").innerHTML = candleChart(last4, pred);
+  document.getElementById("vp").innerHTML = volumeProfileChart(s.profile, ch.last);
+
+  const pats = detectPatterns(s.candles);
+  document.getElementById("patterns").innerHTML = pats.length
+    ? `<div class="mini-h">Patterns detected (latest candles)</div>` + pats.map(x =>
+        `<div class="pat-line"><span class="badge ${x.dir}">${x.label}</span> <span class="read">${x.note}</span></div>`).join("")
+    : `<div class="sub" style="margin-top:12px">No notable candlestick patterns in the latest sessions.</div>`;
+
+  const pc = dirColor(p.dir);
+  document.getElementById("interp").innerHTML =
+    `<span class="tag">Next-candle guess — not financial advice</span>
+     <div style="margin:4px 0 8px"><b style="color:${pc}">${
+       p.dir === "up" ? "Leaning green" : p.dir === "down" ? "Leaning red" : "Indecision"
+     }</b> · guessed close ≈ ${fmt(pred.c)} (range ${fmt(pred.l)}–${fmt(pred.h)}) · made ${p.madeAt} off close ${fmt(p.baseClose)}</div>
+     ${p.text}`;
+
+  document.getElementById("points").innerHTML = a.bullets.map(b => `<li>${b}</li>`).join("");
+
+  document.getElementById("news").innerHTML = (NEWS[key] || []).map(t =>
+    `<li><b>${t.d}</b> — ${t.url ? `<a href="${t.url}" target="_blank" rel="noopener">${t.t}</a>` : t.t}
+     <span class="read">${t.read}</span> <small class="src">${t.src || ""}</small></li>`).join("") ||
+    `<li class="sub">No stored news for this symbol yet.</li>`;
+
+  document.getElementById("foot").textContent = "Candles: Yahoo Finance daily. The dashed candle is Claude's interpretation of the next session. POC = price level with the heaviest traded volume. " + MACRO_NOTE;
+
+  // Pick up fresh data written by the scheduled scan.
+  setTimeout(() => location.reload(), 15 * 60 * 1000);
+}
+</script>
+</body>
+</html>
