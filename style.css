@@ -22,7 +22,6 @@ body {
     radial-gradient(1100px 700px at 88% -12%, #16203a 0%, transparent 58%),
     radial-gradient(900px 620px at -8% 108%, #131a2e 0%, transparent 55%),
     var(--bg);
-  background-attachment: fixed;
   color: var(--text);
   font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", "Noto Sans TC", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -166,6 +165,30 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12.5px; }
   animation: rise 0.55s var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * 90ms + 0.1s);
 }
+.events {
+  display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
+  margin: 14px 0 0; animation: rise 0.55s var(--ease-out) 0.22s both;
+}
+.events-label {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); padding: 5px 0;
+}
+.events .chip.ev-soon { border-color: #6b5b1e; color: #e8c66a; }
+.events .chip.ev-now { border-color: #7a2f35; color: #ff9a9f; }
+.events .chip { white-space: normal; }
+
+.calc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.calc label { font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+.calc input {
+  background: #0e1320; border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); padding: 7px 10px; font: inherit; font-variant-numeric: tabular-nums;
+  transition: border-color 0.2s var(--ease-hover);
+}
+.calc input:focus { outline: none; border-color: var(--accent); }
+.calc-out { margin-top: 14px; font-size: 13.5px; color: #cdd3e0; display: grid; gap: 6px; }
+.calc-out b { font-variant-numeric: tabular-nums; }
+.calc-warn { color: #e8c66a; font-size: 12.5px; }
+
 .panel.wide { margin-top: 24px; }
 .panel.wide svg { width: 100%; height: auto; }
 .struct-note { margin-top: 12px; font-size: 12.5px; color: var(--muted); line-height: 1.55; }

@@ -335,6 +335,36 @@ function structChips(st, lastClose) {
   return chips;
 }
 
+// Equity curves for the MSL-trail backtest: raw / buffered strategies vs buy & hold.
+function equityChart(eq, w = 1240, h = 280) {
+  const series = [
+    { v: eq.bh, color: FLAT, width: 1.4 },
+    { v: eq.strat, color: GREEN, width: 1.8 },
+    { v: eq.stratBuf, color: MA5C, width: 1.8 },
+  ];
+  const all = series.flatMap(s => s.v);
+  const lo = Math.min(...all) * 0.97, hi = Math.max(...all) * 1.03;
+  const mR = 56, mB = 24, mT = 8;
+  const n = eq.dates.length;
+  const x = i => (i / (n - 1)) * (w - mR);
+  const y = v => mT + (1 - (v - lo) / (hi - lo)) * (h - mT - mB);
+  let out = "";
+  for (let g = 0; g <= 4; g++) {
+    const v = lo + ((hi - lo) * g) / 4, gy = y(v);
+    out += `<line x1="0" x2="${w - mR}" y1="${gy}" y2="${gy}" stroke="#1f2535"/>
+            <text x="${w - 4}" y="${gy + 4}" text-anchor="end" class="axis">×${v.toFixed(1)}</text>`;
+  }
+  out += `<line x1="0" x2="${w - mR}" y1="${y(1)}" y2="${y(1)}" stroke="#3a4258" stroke-dasharray="3 4"/>`;
+  series.forEach(s => {
+    const pts = s.v.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    out += `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="${s.width}" stroke-linejoin="round"/>`;
+  });
+  for (let i = 0; i < n; i += Math.ceil(n / 6)) {
+    out += `<text x="${x(i)}" y="${h - 6}" text-anchor="middle" class="axis">${eq.dates[i].slice(2)}</text>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}">${out}</svg>`;
+}
+
 // Build the predicted candle (absolute prices) from % offsets off the last close.
 function buildPrediction(lastClose, p) {
   return {

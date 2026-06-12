@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ray's Watchlist — Market Dashboard</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>📈</text></svg>">
-<link rel="stylesheet" href="style.css">
+<script>document.write(`<link rel="stylesheet" href="style.css?v=${Date.now()}">`);</script>
 </head>
 <body>
 <header class="page">
@@ -14,6 +14,10 @@
   <div class="sub" id="sub"></div>
   <div class="macro" id="macro"></div>
   <div class="alertbox" id="alerts" hidden></div>
+  <div class="events" id="events" hidden>
+    <span class="events-label">Upcoming</span>
+    <span id="eventlist"></span>
+  </div>
   <details class="tape" id="tape" open>
     <summary>Today's tape</summary>
     <ul id="tapelist"></ul>
@@ -31,7 +35,7 @@
 
 <script>
 // cache-bust every load so scheduled-scan updates always come through
-["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "charts.js"]
+["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "events.js", "charts.js"]
   .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
 </script>
 <script>
@@ -95,6 +99,21 @@ document.getElementById("grid").innerHTML = ORDER.map((key, idx) => {
     <td>${e.dirHit ? "✓" : "✗"}</td><td>${e.inRange ? "✓" : "✗"}</td>
   </tr>`).join("") + `</table>`;
 })();
+
+if (typeof EVENTS !== "undefined") {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const up = EVENTS.map(e => ({ ...e, days: Math.round((new Date(e.d) - today) / 864e5) }))
+    .filter(e => e.days >= 0).sort((a, b) => a.days - b.days).slice(0, 8);
+  if (up.length) {
+    document.getElementById("events").hidden = false;
+    document.getElementById("eventlist").innerHTML = up.map(e => {
+      const cls = e.days <= 1 ? "ev-now" : e.days <= 3 ? "ev-soon" : "";
+      const when = e.days === 0 ? "today" : e.days === 1 ? "tomorrow" : `in ${e.days}d`;
+      return `<span class="chip ${cls}" title="${e.d}${e.est ? " (estimated)" : ""}">
+        <b>${when}</b> ${e.d.slice(5)} · ${e.sym ? e.sym + " — " : ""}${e.t}${e.est ? " ≈" : ""}</span>`;
+    }).join("");
+  }
+}
 
 // Pick up fresh data written by the scheduled scan.
 setTimeout(() => location.reload(), 15 * 60 * 1000);
