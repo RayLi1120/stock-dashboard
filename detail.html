@@ -63,7 +63,7 @@
 
 <script>
 // cache-bust every load so scheduled-scan updates always come through
-["data.js", "structure.js", "backtest.js", "analysis.js", "predictions.js", "news.js", "charts.js"]
+["data.js", "structure.js", "backtest.js", "analysis.js", "predictions.js", "news.js", "scorecard.js", "charts.js"]
   .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
 </script>
 <script>
@@ -80,7 +80,7 @@ if (!s || !a || !p) {
      <span class="price">${fmt(ch.last)} <small style="color:var(--muted)">${s.currency}</small></span>
      <span class="chg ${cls}">${sign}${fmt(ch.abs)} (${sign}${ch.pct.toFixed(2)}%)</span>`;
 
-  document.getElementById("chips").innerHTML = indicatorChips(s.candles);
+  document.getElementById("chips").innerHTML = indicatorChips(s.candles) + predOutcomeChip(key);
 
   const last4 = s.candles.slice(-4);
   const pred = buildPrediction(p.baseClose, p);

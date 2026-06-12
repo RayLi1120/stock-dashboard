@@ -365,6 +365,23 @@ function equityChart(eq, w = 1240, h = 280) {
   return `<svg viewBox="0 0 ${w} ${h}">${out}</svg>`;
 }
 
+// Outcome of the most recent graded guess for a symbol (from scorecard.js, if loaded).
+// Shown as an indicator chip once a prediction has been graded against a real candle.
+function predOutcomeChip(key) {
+  if (typeof SCORECARD === "undefined" || !SCORECARD.entries) return "";
+  const mine = SCORECARD.entries.filter(e => e.sym === key);
+  if (!mine.length) return "";
+  const e = mine[mine.length - 1];
+  const miss = ((e.actualC - e.predC) / e.predC) * 100;
+  const am = Math.abs(miss);
+  const grade = am <= 1 ? ["on target", GREEN] : am <= 3 ? ["close", MA5C] : ["off", RED];
+  const hits = mine.filter(m => m.dirHit).length;
+  return `<span class="chip" title="${e.baseDate} guess vs ${e.actualDate} actual: guessed close ${fmt(e.predC)}, actual ${fmt(e.actualC)}; predicted range ${e.inRange ? "caught" : "missed"} the close">
+    Last guess <b style="color:${e.dirHit ? GREEN : RED}">dir ${e.dirHit ? "✓" : "✗"}</b> ·
+    <b style="color:${grade[1]}">${grade[0]}</b> (${miss >= 0 ? "+" : ""}${miss.toFixed(1)}% miss) ·
+    record ${hits}/${mine.length}</span>`;
+}
+
 // Build the predicted candle (absolute prices) from % offsets off the last close.
 function buildPrediction(lastClose, p) {
   return {

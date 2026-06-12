@@ -74,7 +74,7 @@ document.getElementById("grid").innerHTML = ORDER.map((key, idx) => {
         <span class="chg ${cls}">${sign}${ch.pct.toFixed(2)}%</span>
       </span>
     </div>
-    <div class="indis">${indicatorChips(s.candles)}</div>
+    <div class="indis">${indicatorChips(s.candles)}${predOutcomeChip(key)}</div>
     ${patternBadges(s.candles)}
   </a>`;
 }).join("");
