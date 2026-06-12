@@ -51,5 +51,14 @@ const ANALYSIS = {
    "<b>Bull case from here:</b> Morgan Stanley framed WWDC as the catalyst that 'decides AI positioning' — expectations are now reset low, and Apple's capital-return machine is unmatched; event risk has passed.",
    "<b>Risk:</b> same FOMC binary as everything else, plus iPhone-cycle dependence — if AI Siri doesn't drive a supercycle, FY27 estimates look stretched.",
   ] },
+ "SPCX": {
+  bullets: [
+   "<b>What just happened:</b> the largest IPO in history — June 12, 2026: priced $135, raised $75B at a $1.75T valuation, opened $150 (+11%) on 58M shares, popped ~30% intraday. Musk became the world's first trillionaire on the print.",
+   "<b>The business:</b> Starlink is the only profitable segment and the biggest revenue driver; reusable rockets + Starship are the growth/option value the $1.75T tag is paying for.",
+   "<b>Trading character (weeks 1–4):</b> this is a flow instrument, not a fundamentals one — flippers vs index inclusion demand vs retail FOMO, with Morgan Stanley's stabilization bid guarding the $150 open. Indicators on this dashboard (RSI14, MA20, structure) need ~3–4 weeks of candles to populate.",
+   "<b>Key dates ahead:</b> analyst initiations when the quiet period ends (~mid-July, usually a volatility event), first public earnings (~August), and the ~180-day lockup expiry (~December) — the structural supply overhang.",
+   "<b>Levels that exist so far:</b> $135 IPO price (the floor of floors), $150 day-one open/stabilization zone, $176.5 day-one high. That's the entire technical map right now.",
+   "<b>Risks:</b> valuation prices in flawless Starlink growth + Mars optionality; Musk key-man concentration; a hawkish FOMC next week hits freshly-IPO'd mega-growth hardest of anything on your list.",
+  ] },
 };
 const MACRO_NOTE = "Binary event for every name on this list: FOMC June 16–17 — first projections under new Fed Chair Kevin Warsh. Sticky inflation (core services ~3.5% YoY) has markets fearing hikes; the Iran-deal thaw is the offsetting tailwind.";

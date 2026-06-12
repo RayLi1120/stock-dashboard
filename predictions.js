@@ -78,5 +78,18 @@ const PREDICTIONS = {
   "baseClose": 295.63,
   "stop": 290,
   "support": 292.47
+ },
+ "SPCX": {
+  "dir": "up",
+  "oPct": 0.5,
+  "hPct": 5.5,
+  "lPct": -5.0,
+  "cPct": 2.0,
+  "text": "Day 2 of the largest IPO in history: priced $135, opened $150 on 58M shares, ran to 176.52, +28% day one. Hot mega-IPOs typically chop violently for days as flippers meet index/FOMO demand — expect a wide 165–182 range with an upward lean while the Morgan Stanley stabilization bid guards the $150 open. This is a flow trade, not a fundamentals trade, until research initiations (~mid-July). Invalidation: a close below 150 means the pop is being fully unwound.",
+  "madeAt": "2026-06-13 02:16",
+  "baseDate": "06-12",
+  "baseClose": 172.58,
+  "stop": 150,
+  "support": 160.29
  }
 };

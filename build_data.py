@@ -23,6 +23,7 @@ SYMBOLS = [
     ("1307.TW", "1307", "San Fang 三芳"),
     ("NVDA", "NVDA", "NVIDIA"),
     ("AAPL", "AAPL", "Apple"),
+    ("SPCX", "SPCX", "SpaceX"),
 ]
 
 def volume_profile(yahoo, bins=24):

@@ -1,7 +1,7 @@
 // Machine-managed alert log. Strict JSON body — written by check_alerts.py.
 const ALERTS = {
- "generated": "2026-06-12 21:33",
- "newCount": 0,
+ "generated": "2026-06-13 02:16",
+ "newCount": 1,
  "items": [
   {
    "at": "2026-06-12 18:25",
@@ -42,6 +42,14 @@ const ALERTS = {
    "rule": "vol-spike",
    "level": "warn",
    "msg": "volume 2.2× the 20-day average"
+  },
+  {
+   "at": "2026-06-13 02:16",
+   "d": "06-12",
+   "sym": "SPCX",
+   "rule": "gap",
+   "level": "warn",
+   "msg": "gapped +11.1% at the open"
   }
  ]
 };

@@ -1,11 +1,43 @@
 {
-  "generic": { "rsi_hi": 70, "rsi_lo": 30, "vol_spike": 2.0, "gap_pct": 2.0 },
-  "levels": {
-    "2344": { "above": 190, "below": 165, "why": "190 = double-top / chart D-target; 165 = rebound invalidation" },
-    "2337": { "below": 140, "why": "140 = rebound invalidation (June 12 open zone)" },
-    "6770": { "below": 64, "why": "64 = bounce-failed level" },
-    "NVDA": { "below": 200, "above": 215, "why": "200 = psychological support; 215 opens gap-fill" },
-    "1307": { "above": 36.9, "below": 35, "why": "36.9 = monthly-high breakout; 35 = back into prior range" },
-    "AAPL": { "below": 290, "above": 302, "why": "290 = post-WWDC low; 302 = reclaim of pre-keynote level" }
+ "generic": {
+  "rsi_hi": 70,
+  "rsi_lo": 30,
+  "vol_spike": 2.0,
+  "gap_pct": 2.0
+ },
+ "levels": {
+  "2344": {
+   "above": 190,
+   "below": 165,
+   "why": "190 = double-top / chart D-target; 165 = rebound invalidation"
+  },
+  "2337": {
+   "below": 140,
+   "why": "140 = rebound invalidation (June 12 open zone)"
+  },
+  "6770": {
+   "below": 64,
+   "why": "64 = bounce-failed level"
+  },
+  "NVDA": {
+   "below": 200,
+   "above": 215,
+   "why": "200 = psychological support; 215 opens gap-fill"
+  },
+  "1307": {
+   "above": 36.9,
+   "below": 35,
+   "why": "36.9 = monthly-high breakout; 35 = back into prior range"
+  },
+  "AAPL": {
+   "below": 290,
+   "above": 302,
+   "why": "290 = post-WWDC low; 302 = reclaim of pre-keynote level"
+  },
+  "SPCX": {
+   "below": 150,
+   "above": 176.6,
+   "why": "150 = day-one open/stabilization floor; 176.6 = day-one high breakout"
   }
+ }
 }

@@ -17,7 +17,8 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SYMBOLS = [("2344.TW", "2344"), ("2337.TW", "2337"), ("6770.TW", "6770"),
-           ("1307.TW", "1307"), ("NVDA", "NVDA"), ("AAPL", "AAPL")]
+           ("1307.TW", "1307"), ("NVDA", "NVDA"), ("AAPL", "AAPL"),
+           ("SPCX", "SPCX")]
 K = 3          # fractal half-width
 WINDOW = 190   # candles shown on the structure chart
 MIN_TOUCHES = 3

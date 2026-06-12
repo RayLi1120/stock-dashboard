@@ -115,7 +115,7 @@ if (!s || !a || !p) {
   document.getElementById("foot").textContent = "Candles: Yahoo Finance daily. The dashed candle is Claude's interpretation of the next session. POC = price level with the heaviest traded volume. " + MACRO_NOTE;
 
   const st = typeof STRUCTURE !== "undefined" && STRUCTURE[key];
-  if (st) {
+  if (st && st.sessions >= 30) {
     document.getElementById("structPanel").hidden = false;
     document.getElementById("structChips").innerHTML = structChips(st, ch.last);
     document.getElementById("structChart").innerHTML = structureChart(st);
@@ -126,7 +126,7 @@ if (!s || !a || !p) {
   }
 
   const bt = typeof BACKTEST !== "undefined" && BACKTEST[key];
-  if (bt) {
+  if (bt && bt.equity.dates.length >= 30) {
     document.getElementById("btPanel").hidden = false;
     const ba = bt.raw.stats, bb = bt.buffered.stats;
     const beat = ba.stratRet > ba.bhRet, beatB = bb.stratRet > bb.bhRet;

@@ -30,6 +30,10 @@ const NEWS = {
   {"d": "2026-06-12", "t": "No headline driver behind today's +4.4% push to the top of the monthly range", "src": "scan note", "read": "Thin-coverage materials name — the breakout itself is the news; watch the monthly revenue print (~10th of each month)."},
   {"d": "profile", "t": "San Fang 三芳化學: PU synthetic leather, films & elastic fibers for footwear/apparel supply chains", "src": "Yahoo Finance profile", "read": "Sporting-goods materials supplier — your list's diversifier away from AI/rates beta.", "url": "https://finance.yahoo.com/quote/1307.TW/"}
  ],
+ "SPCX": [
+  {"d": "2026-06-12", "t": "SpaceX IPO: biggest in history — $135/share, $75B raised, $1.75T valuation; opens $150, pops ~30%", "src": "CNBC", "read": "Day-one map: $135 IPO floor, $150 stabilization open, $176.5 high. Flow-driven until initiations (~mid-July).", "url": "https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html"},
+  {"d": "2026-06-12", "t": "Starlink confirmed as SpaceX's only profitable segment in IPO disclosures", "src": "Kiplinger/CNBC", "read": "The $1.75T tag is Starlink cashflow + Starship optionality — watch Starlink subscriber/ARPU metrics at first earnings.", "url": "https://www.kiplinger.com/investing/live/spacex-ipo-spcx-stock-updates-and-commentary"}
+ ],
  "AAPL": [
   {"d": "2026-06-08", "t": "WWDC 2026: rebuilt Siri on Apple Intelligence (own models + Google Gemini), iOS 27 — stock fell ~$301 → ~$290", "src": "TradingKey / Analytics Insight", "read": "AI letdown: no monetization story, Gemini reliance read as weakness. Expectations now reset low.", "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/261952325-apple-intelligence-is-live-can-wwdc-2026-spark-an-iphone-supercycle-tradingkey"},
   {"d": "2026-06-08", "t": "Tim Cook's final WWDC as CEO — John Ternus takes over in September", "src": "NPR", "read": "Succession discount until Ternus states his capital-allocation stance; hardware-chief pick hints at product-led strategy.", "url": "https://www.npr.org/2026/06/08/nx-s1-5847937/apple-wwdc-2026-siri-ai-tim-cook"},

@@ -41,7 +41,7 @@
 <script>
 document.getElementById("macro").textContent = "⚠ " + MACRO_NOTE;
 document.getElementById("sub").textContent =
-  "6 symbols from your TradingView watchlist · daily candles, last month · green = up, red = down · data updated " +
+  "7 symbols from your TradingView watchlist · daily candles, last month · green = up, red = down · data updated " +
   (typeof GENERATED_AT !== "undefined" ? GENERATED_AT : "—") + " (page reloads every 15 min)";
 
 // Alerts: show entries from the most recent alert batch.
@@ -58,7 +58,7 @@ document.getElementById("tapelist").innerHTML = (NEWS._tape || []).map(t =>
   `<li><b>${t.d}</b> — ${t.url ? `<a href="${t.url}" target="_blank" rel="noopener">${t.t}</a>` : t.t}
    <span class="read">${t.read}</span></li>`).join("");
 
-const ORDER = ["2344", "2337", "6770", "1307", "NVDA", "AAPL"];
+const ORDER = ["2344", "2337", "6770", "1307", "NVDA", "AAPL", "SPCX"];
 document.getElementById("grid").innerHTML = ORDER.map((key, idx) => {
   const s = STOCK_DATA[key];
   const ch = dayChange(s.candles);
