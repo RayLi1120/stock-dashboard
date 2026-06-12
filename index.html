@@ -42,7 +42,7 @@
 document.getElementById("macro").textContent = "⚠ " + MACRO_NOTE;
 document.getElementById("sub").textContent =
   "7 symbols from your TradingView watchlist · daily candles, last month · green = up, red = down · data updated " +
-  (typeof GENERATED_AT !== "undefined" ? GENERATED_AT : "—") + " (page reloads every 15 min)";
+  (typeof GENERATED_AT !== "undefined" ? GENERATED_AT : "—") + " (page reloads every 10 min)";
 
 // Alerts: show entries from the most recent alert batch.
 (() => {
@@ -116,7 +116,7 @@ if (typeof EVENTS !== "undefined") {
 }
 
 // Pick up fresh data written by the scheduled scan.
-setTimeout(() => location.reload(), 15 * 60 * 1000);
+setTimeout(() => location.reload(), 10 * 60 * 1000);
 </script>
 </body>
 </html>

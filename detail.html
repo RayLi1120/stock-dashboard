@@ -33,19 +33,17 @@
       <h2>News</h2>
       <ul class="newslist" id="news"></ul>
     </div>
-    <div class="panel" style="--i:3">
-      <h2>Position size calculator</h2>
-      <div class="calc">
-        <label>Capital <input type="number" id="cCap" min="0" step="1000"></label>
-        <label>Risk per trade % <input type="number" id="cRisk" min="0.1" max="10" step="0.1"></label>
-        <label>Entry <input type="number" id="cEntry" step="0.01"></label>
-        <label>Stop <input type="number" id="cStop" step="0.01"></label>
-      </div>
-      <div class="calc-out" id="cOut"></div>
-    </div>
   </div>
 </div>
-<div class="panel wide" style="--i:3" id="structPanel" hidden>
+
+<div class="panel wide" style="--i:3" id="gapPanel">
+  <h2>Prediction gap — my guesses vs the real closes</h2>
+  <div class="chips-row" id="gapChips"></div>
+  <div id="gapChart"></div>
+  <div class="struct-note" id="gapNote"></div>
+</div>
+
+<div class="panel wide" style="--i:4" id="structPanel" hidden>
   <h2>Market structure & support map — 2 years daily</h2>
   <div class="chips-row" id="structChips"></div>
   <div id="structChart"></div>
@@ -147,40 +145,26 @@ if (!s || !a || !p) {
       `Swings confirm 3 bars late (walk-forward, no lookahead); fills at signal-day close; no costs; long-only. Span ${bt.span[0]} → ${bt.span[1]}. ` + verdict;
   }
 
-  const cap0 = +(localStorage.getItem("psc_cap") || 1000000);
-  const risk0 = +(localStorage.getItem("psc_risk") || 1);
-  const $ = id => document.getElementById(id);
-  $("cCap").value = cap0; $("cRisk").value = risk0;
-  $("cEntry").value = ch.last;
-  $("cStop").value = p.stop ?? (st && st.msl ? st.msl.p : "");
-  const isTW = s.currency === "TWD";
-  function calc() {
-    const cap = +$("cCap").value, risk = +$("cRisk").value;
-    const entry = +$("cEntry").value, stop = +$("cStop").value;
-    localStorage.setItem("psc_cap", cap); localStorage.setItem("psc_risk", risk);
-    if (!(cap > 0 && risk > 0 && entry > 0 && stop > 0)) { $("cOut").innerHTML = ""; return; }
-    if (stop >= entry) { $("cOut").innerHTML = `<div class="calc-warn">Stop must be below entry for a long position.</div>`; return; }
-    const riskAmt = cap * risk / 100;
-    const perShare = entry - stop;
-    let shares = Math.floor(riskAmt / perShare);
-    const value = shares * entry;
-    const capped = value > cap;
-    if (capped) shares = Math.floor(cap / entry);
-    const val2 = shares * entry;
-    const gapPct = isTW ? 10 : 15;
-    const gapLoss = shares * entry * gapPct / 100;
-    $("cOut").innerHTML = `
-      <div>Risk budget: <b>${fmt(riskAmt)}</b> ${s.currency} (${risk}% of capital)</div>
-      <div>Stop distance: <b>${fmt(perShare)}</b> (${(perShare / entry * 100).toFixed(1)}%)</div>
-      <div>Size: <b>${shares.toLocaleString()}</b> shares${isTW ? ` ≈ <b>${Math.floor(shares / 1000)}</b> lots (張) + ${shares % 1000} odd` : ""}${capped ? " — capped by capital" : ""}</div>
-      <div>Position value: <b>${fmt(val2)}</b> ${s.currency} (${(val2 / cap * 100).toFixed(1)}% of capital)</div>
-      <div class="calc-warn">Gap risk: a ${gapPct}% ${isTW ? "limit-down open" : "overnight gap"} ≈ −${fmt(gapLoss)} (${(gapLoss / cap * 100).toFixed(2)}% of capital) — stops don't protect against gaps.</div>`;
+  const myEntries = (typeof SCORECARD !== "undefined" && SCORECARD.entries || []).filter(e => e.sym === key);
+  const gap = predictionGapChart(s.candles, myEntries);
+  document.getElementById("gapChart").innerHTML = gap.svg;
+  if (myEntries.length) {
+    const misses = myEntries.map(e => Math.abs((e.actualC - e.predC) / e.predC) * 100);
+    const avgMiss = misses.reduce((a, b) => a + b, 0) / misses.length;
+    const hits = myEntries.filter(e => e.dirHit).length;
+    const ranged = myEntries.filter(e => e.inRange).length;
+    document.getElementById("gapChips").innerHTML = `
+      <span class="chip">Graded guesses <b>${myEntries.length}</b></span>
+      <span class="chip">Avg close miss <b style="color:${avgMiss <= 1 ? GREEN : avgMiss <= 3 ? MA5C : RED}">${avgMiss.toFixed(1)}%</b></span>
+      <span class="chip">Direction <b>${hits}/${myEntries.length}</b></span>
+      <span class="chip">Range caught close <b>${ranged}/${myEntries.length}</b></span>`;
   }
-  ["cCap", "cRisk", "cEntry", "cStop"].forEach(id => $(id).addEventListener("input", calc));
-  calc();
+  document.getElementById("gapNote").textContent = gap.marks
+    ? "Solid candles = what actually happened. Amber tick = the close I guessed the scan before; dashed bracket = my guessed range; the colored band is the gap between my guess and reality (green ≤1% miss, amber ≤3%, red beyond), ✓/✗ = direction call. One guess is graded per trading day."
+    : "Solid candles = the last sessions. My guess markers appear here as predictions get graded against each new close (one per trading day, scans run 3×/day on weekdays) — first grades land at the next scan after a close.";
 
   // Pick up fresh data written by the scheduled scan.
-  setTimeout(() => location.reload(), 15 * 60 * 1000);
+  setTimeout(() => location.reload(), 10 * 60 * 1000);
 }
 </script>
 </body>
