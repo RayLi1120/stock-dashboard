@@ -35,9 +35,17 @@
     </div>
   </div>
 </div>
+<div class="panel wide" style="--i:3" id="structPanel" hidden>
+  <h2>Market structure & support map — 2 years daily</h2>
+  <div class="chips-row" id="structChips"></div>
+  <div id="structChart"></div>
+  <div class="struct-note" id="structNote"></div>
+</div>
+
 <footer id="foot"></footer>
 
 <script src="data.js"></script>
+<script src="structure.js"></script>
 <script src="analysis.js"></script>
 <script src="predictions.js"></script>
 <script src="news.js"></script>
@@ -85,6 +93,17 @@ if (!s || !a || !p) {
     `<li class="sub">No stored news for this symbol yet.</li>`;
 
   document.getElementById("foot").textContent = "Candles: Yahoo Finance daily. The dashed candle is Claude's interpretation of the next session. POC = price level with the heaviest traded volume. " + MACRO_NOTE;
+
+  const st = typeof STRUCTURE !== "undefined" && STRUCTURE[key];
+  if (st) {
+    document.getElementById("structPanel").hidden = false;
+    document.getElementById("structChips").innerHTML = structChips(st, ch.last);
+    document.getElementById("structChart").innerHTML = structureChart(st);
+    document.getElementById("structNote").textContent =
+      `Evaluated over ${st.sessions} sessions (${st.span[0]} → ${st.span[1]}), showing the last ${st.candles.length}. ` +
+      `Swings (▲ MSL / ▼ MSH) are 3-bar fractals, confirmed only — no hindsight. Shaded bands are price areas with ≥3 historical swing touches over the full 2 years. ` +
+      `Trail logic: exit signal = daily CLOSE below the last MSL (dashed red); the dotted line adds a 1-ATR buffer against wick hunts. Gap risk is not covered by any stop — size accordingly.`;
+  }
 
   // Pick up fresh data written by the scheduled scan.
   setTimeout(() => location.reload(), 15 * 60 * 1000);

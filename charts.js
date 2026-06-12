@@ -245,6 +245,88 @@ function volumeProfileChart(profile, lastClose, w = 220, h = 300) {
   return `<svg viewBox="0 0 ${w} ${h}">${out}</svg>`;
 }
 
+// ---- market structure (2y daily, from structure.js) ----
+
+// Full structure map: candles + swing markers + S/R zones + MSL stop / MSH lines.
+function structureChart(st, w = 1240, h = 420) {
+  const cs = st.candles, n = cs.length;
+  const mR = 66, mB = 26, mT = 10;
+  const cw2 = (w - mR) / n;
+  let lo = Math.min(...cs.map(c => c.l)), hi = Math.max(...cs.map(c => c.h));
+  if (st.stopBuf != null) lo = Math.min(lo, st.stopBuf);
+  const pad = (hi - lo) * 0.04 || 1;
+  lo -= pad; hi += pad;
+  const x = i => i * cw2 + cw2 / 2;
+  const y = v => mT + (1 - (v - lo) / (hi - lo)) * (h - mT - mB);
+  let out = "";
+  // S/R zones (clipped to view)
+  st.zones.forEach(z => {
+    const zt = Math.min(z.hi, hi), zb = Math.max(z.lo, lo);
+    if (zb >= hi || zt <= lo) return;
+    const col = z.kind === "support" ? GREEN : RED;
+    out += `<rect x="0" y="${y(zt)}" width="${w - mR}" height="${Math.max(y(zb) - y(zt), 2)}" fill="${col}" opacity="0.07"/>
+            <line x1="0" x2="${w - mR}" y1="${y(zt)}" y2="${y(zt)}" stroke="${col}" opacity="0.25" stroke-width="1"/>
+            <text x="6" y="${y(zt) + 12}" class="axis" fill="${col}" opacity="0.9">${z.kind} ×${z.n} · ${fmt(z.lo)}–${fmt(z.hi)}</text>`;
+  });
+  // gridlines
+  for (let g = 0; g <= 4; g++) {
+    const v = lo + ((hi - lo) * g) / 4, gy = y(v);
+    out += `<line x1="0" x2="${w - mR}" y1="${gy}" y2="${gy}" stroke="#1f2535" stroke-width="1"/>
+            <text x="${w - 4}" y="${gy + 4}" text-anchor="end" class="axis">${fmt(v)}</text>`;
+  }
+  // candles
+  const bw = Math.max(cw2 * 0.62, 1.2);
+  cs.forEach((c, i) => {
+    const col = c.c >= c.o ? GREEN : RED;
+    const cx = x(i);
+    out += `<line x1="${cx}" x2="${cx}" y1="${y(c.h)}" y2="${y(c.l)}" stroke="${col}" stroke-width="0.8" opacity="0.85"/>`;
+    out += `<rect x="${cx - bw / 2}" y="${y(Math.max(c.o, c.c))}" width="${bw}" height="${Math.max(y(Math.min(c.o, c.c)) - y(Math.max(c.o, c.c)), 1)}" fill="${col}"/>`;
+  });
+  // swing markers
+  st.swings.forEach(s => {
+    if (s.i < 0 || s.i >= n) return;
+    const cx = x(s.i);
+    if (s.t === "H") out += `<text x="${cx}" y="${y(s.p) - 5}" text-anchor="middle" font-size="9" fill="${RED}">▼</text>`;
+    else out += `<text x="${cx}" y="${y(s.p) + 12}" text-anchor="middle" font-size="9" fill="${GREEN}">▲</text>`;
+  });
+  // date ticks
+  for (let i = 0; i < n; i += Math.ceil(n / 6)) {
+    out += `<text x="${x(i)}" y="${h - 8}" text-anchor="middle" class="axis">${cs[i].d.slice(2)}</text>`;
+  }
+  // level lines: MSL stop, ATR buffer, MSH
+  if (st.msl) out += `<line x1="0" x2="${w - mR}" y1="${y(st.msl.p)}" y2="${y(st.msl.p)}" stroke="${RED}" stroke-width="1.5" stroke-dasharray="7 5"/>
+    <text x="${w - mR - 6}" y="${y(st.msl.p) - 5}" text-anchor="end" class="axis" fill="${RED}">Structure stop · last MSL ${fmt(st.msl.p)} (${st.msl.d})</text>`;
+  if (st.stopBuf != null) out += `<line x1="0" x2="${w - mR}" y1="${y(st.stopBuf)}" y2="${y(st.stopBuf)}" stroke="${RED}" stroke-width="1" stroke-dasharray="2 5" opacity="0.6"/>
+    <text x="${w - mR - 6}" y="${y(st.stopBuf) + 13}" text-anchor="end" class="axis" fill="${RED}" opacity="0.75">buffered −1 ATR ${fmt(st.stopBuf)}</text>`;
+  if (st.msh) out += `<line x1="0" x2="${w - mR}" y1="${y(st.msh.p)}" y2="${y(st.msh.p)}" stroke="#6c8cff" stroke-width="1.5" stroke-dasharray="7 5"/>
+    <text x="${w - mR - 6}" y="${y(st.msh.p) - 5}" text-anchor="end" class="axis" fill="#6c8cff">Last MSH ${fmt(st.msh.p)} (${st.msh.d})</text>`;
+  return `<svg viewBox="0 0 ${w} ${h}">${out}</svg>`;
+}
+
+// Summary chips for the structure panel.
+function structChips(st, lastClose) {
+  const tcol = st.trend === "up" ? GREEN : st.trend === "down" ? RED : FLAT;
+  const tlabel = st.trend === "up" ? "▲ uptrend (HH·HL)" : st.trend === "down" ? "▼ downtrend (LH·LL)" : "◆ mixed structure";
+  let chips = `<span class="chip">Trend <b style="color:${tcol}">${tlabel}</b></span>`;
+  if (st.msl) {
+    const dist = ((st.msl.p - lastClose) / lastClose) * 100;
+    const broken = lastClose < st.msl.p;
+    chips += `<span class="chip">Stop · MSL <b style="color:${RED}">${fmt(st.msl.p)}</b> ${broken
+      ? `<b style="color:${RED}">⚠ BROKEN — price below stop</b>`
+      : `(${dist.toFixed(1)}% below)`}</span>`;
+  }
+  if (st.msh) {
+    const above = lastClose > st.msh.p;
+    chips += `<span class="chip">MSH <b style="color:#6c8cff">${fmt(st.msh.p)}</b> ${above
+      ? `<b style="color:${GREEN}">breakout — price above</b>`
+      : `(+${(((st.msh.p - lastClose) / lastClose) * 100).toFixed(1)}% away)`}</span>`;
+  }
+  if (st.atr != null) chips += `<span class="chip">ATR14 <b>${fmt(st.atr)}</b></span>`;
+  const sup = st.zones.filter(z => z.kind === "support").sort((a, b) => b.hi - a.hi)[0];
+  if (sup) chips += `<span class="chip">Nearest support zone <b style="color:${GREEN}">${fmt(sup.lo)}–${fmt(sup.hi)}</b> (×${sup.n} touches)</span>`;
+  return chips;
+}
+
 // Build the predicted candle (absolute prices) from % offsets off the last close.
 function buildPrediction(lastClose, p) {
   return {

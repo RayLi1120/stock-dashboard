@@ -43,6 +43,8 @@ def rsi14(closes):
 
 stocks = read_js_const(os.path.join(HERE, "data.js"), "STOCK_DATA")
 rules = json.load(open(os.path.join(HERE, "alert_rules.json")))
+struct_path = os.path.join(HERE, "structure.js")
+structure = read_js_const(struct_path, "STRUCTURE") if os.path.exists(struct_path) else {}
 
 alerts_path = os.path.join(HERE, "alerts.js")
 existing = read_js_const(alerts_path, "ALERTS") if os.path.exists(alerts_path) else {"items": []}
@@ -89,6 +91,15 @@ for sym, s in stocks.items():
     gap = (a["o"] - b["c"]) / b["c"] * 100
     if abs(gap) >= g["gap_pct"]:
         add(sym, d, "gap", "warn", f"gapped {gap:+.1f}% at the open")
+
+    st = structure.get(sym) or {}
+    msl, msh = st.get("msl"), st.get("msh")
+    if msl and a["c"] < msl["p"] <= b["c"]:
+        add(sym, d, "structure-break", "warn",
+            f"daily close {a['c']} broke the last MSL {msl['p']} ({msl['d']}) — structure stop hit, uptrend invalidated")
+    if msh and a["c"] > msh["p"] >= b["c"]:
+        add(sym, d, "structure-breakout", "info",
+            f"closed above the last MSH {msh['p']} ({msh['d']}) — new structure high")
 
     ma5p, ma20p = sma_last(closes[:-1], 5), sma_last(closes[:-1], 20)
     ma5n, ma20n = sma_last(closes, 5), sma_last(closes, 20)
