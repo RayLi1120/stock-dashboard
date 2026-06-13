@@ -75,7 +75,7 @@ function newSetup() {
   cur = TRAINING.samples[Math.floor(Math.random() * TRAINING.samples.length)];
   call = null;
   document.getElementById("futN").textContent = cur.future.length;
-  document.getElementById("setupMeta").textContent = `${cur.market} market · ${TRAINING.shownBars} bars shown · symbol & dates hidden`;
+  document.getElementById("setupMeta").textContent = `${cur.market} · daily · ${TRAINING.shownBars} bars shown · symbol & dates hidden · news spikes filtered out`;
   document.getElementById("trainerChart").innerHTML = trainerChart(cur.shown, cur.future, false);
   document.getElementById("answerArea").hidden = false;
   document.getElementById("resultArea").hidden = true;
