@@ -40,6 +40,7 @@
   <h2>Prediction gap — my guesses vs the real closes</h2>
   <div class="chips-row" id="gapChips"></div>
   <div id="gapChart"></div>
+  <div class="cal-box" id="gapCal" hidden></div>
   <div class="struct-note" id="gapNote"></div>
 </div>
 
@@ -61,7 +62,7 @@
 
 <script>
 // cache-bust every load so scheduled-scan updates always come through
-["data.js", "structure.js", "backtest.js", "analysis.js", "predictions.js", "news.js", "scorecard.js", "charts.js"]
+["data.js", "structure.js", "backtest.js", "analysis.js", "predictions.js", "news.js", "scorecard.js", "calibration.js", "charts.js"]
   .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
 </script>
 <script>
@@ -159,6 +160,23 @@ if (!s || !a || !p) {
       <span class="chip">Direction <b>${hits}/${myEntries.length}</b></span>
       <span class="chip">Range caught close <b>${ranged}/${myEntries.length}</b></span>`;
   }
+  const cal = typeof CALIBRATION !== "undefined" && CALIBRATION.perSymbol && CALIBRATION.perSymbol[key];
+  const calEl = document.getElementById("gapCal");
+  if (cal && cal.active) {
+    const dcol = cal.dirAcc >= 60 ? GREEN : cal.dirAcc >= 45 ? MA5C : RED;
+    const bias = cal.closeBias > 0 ? `too low by ${cal.closeBias}%` : cal.closeBias < 0 ? `too high by ${Math.abs(cal.closeBias)}%` : "unbiased";
+    const adj = [];
+    if (cal.closeBiasAdj) adj.push(`close ${cal.closeBiasAdj > 0 ? "+" : ""}${cal.closeBiasAdj}%`);
+    if (cal.rangeMult !== 1) adj.push(`range ×${cal.rangeMult}`);
+    calEl.innerHTML = `<span class="cal-tag">Self-calibration · ${cal.n} graded</span>
+      Direction <b style="color:${dcol}">${cal.dirAcc}%</b> · my closes run <b>${bias}</b> (avg miss ${cal.closeMAE}%) · range caught <b>${cal.rangeHit}%</b> of closes.
+      ${adj.length ? `<b>Auto-applied to the next guess:</b> ${adj.join(", ")}.` : "Predictions are well-calibrated — no correction needed."}`;
+    calEl.hidden = false;
+  } else if (cal) {
+    calEl.innerHTML = `<span class="cal-tag">Self-calibration</span> ${cal.n}/${CALIBRATION.minN} graded guesses — corrections kick in once enough closes are scored.`;
+    calEl.hidden = false;
+  }
+
   document.getElementById("gapNote").textContent = gap.marks
     ? "Solid candles = what actually happened. Amber tick = the close I guessed the scan before; dashed bracket = my guessed range; the colored band is the gap between my guess and reality (green ≤1% miss, amber ≤3%, red beyond), ✓/✗ = direction call. One guess is graded per trading day."
     : "Solid candles = the last sessions. My guess markers appear here as predictions get graded against each new close (one per trading day, scans run 3×/day on weekdays) — first grades land at the next scan after a close.";

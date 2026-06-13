@@ -28,6 +28,7 @@
 
 <section class="panel discover" id="discover" hidden>
   <h2>🔭 Discovery — potentially rising stocks <small id="discMeta"></small></h2>
+  <div class="disc-hitrate" id="discHitrate" hidden></div>
   <div class="disc-sub" id="discCriteria"></div>
   <div class="disc-grid" id="discGrid"></div>
 </section>
@@ -41,7 +42,7 @@
 
 <script>
 // cache-bust every load so scheduled-scan updates always come through
-["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "events.js", "discover.js", "charts.js"]
+["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "events.js", "discover.js", "discovery_log.js", "charts.js"]
   .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
 </script>
 <script>
@@ -127,6 +128,19 @@ if (typeof DISCOVER !== "undefined" && DISCOVER.picks && DISCOVER.picks.length) 
     `scanned ${DISCOVER.universe} names · ${DISCOVER.generated}`;
   document.getElementById("discCriteria").textContent =
     "Ranked off " + DISCOVER.criteria + ". Beyond your watchlist — candidates to research, not recommendations.";
+  if (typeof DISCOVERY_LOG !== "undefined" && DISCOVERY_LOG.stats) {
+    const st = DISCOVERY_LOG.stats;
+    const hr = document.getElementById("discHitrate");
+    hr.hidden = false;
+    if (st.scored > 0) {
+      const wcol = st.winRate >= 60 ? GREEN : st.winRate >= 45 ? "#f0b90b" : RED;
+      hr.innerHTML = `<b>Screener track record:</b> <b style="color:${wcol}">${st.winRate}%</b> of picks rose
+        (${st.scored} graded, held ≥5 sessions) · avg <span class="${st.avgRet >= 0 ? "up" : "down"}">${st.avgRet >= 0 ? "+" : ""}${st.avgRet}%</span> ·
+        median <span class="${st.medRet >= 0 ? "up" : "down"}">${st.medRet >= 0 ? "+" : ""}${st.medRet}%</span> forward return · ${st.tracked} tracked total`;
+    } else {
+      hr.innerHTML = `<b>Screener track record:</b> ${st.tracked} picks logged, none held ≥5 sessions yet — batting average appears once forward returns mature (judge it after 20+ graded picks).`;
+    }
+  }
   document.getElementById("discGrid").innerHTML = DISCOVER.picks.map((p, idx) => {
     const up = p.chg1d >= 0;
     const col = p.score >= 80 ? GREEN : p.score >= 65 ? "#f0b90b" : "#6c8cff";

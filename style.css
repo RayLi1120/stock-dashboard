@@ -180,6 +180,18 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12.5px; }
 .discover { margin-top: 28px; animation: rise 0.6s var(--ease-out) both; }
 .discover h2 small { font-weight: 450; color: var(--muted); font-size: 12.5px; text-transform: none; letter-spacing: 0; margin-left: 8px; }
 .disc-sub { color: var(--muted); font-size: 13px; margin: 4px 0 18px; max-width: 900px; }
+.disc-hitrate {
+  margin: 10px 0 4px; padding: 9px 14px; font-size: 13px; color: #cdd3e0;
+  background: #161b29; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px;
+}
+.cal-box {
+  margin-top: 14px; padding: 11px 14px; font-size: 13px; color: #cdd3e0; line-height: 1.55;
+  background: #161b29; border: 1px solid var(--border); border-left: 3px solid #6c8cff; border-radius: 8px;
+}
+.cal-tag {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--accent); margin-right: 8px;
+}
 .disc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 16px; }
 .disc-card {
   background: linear-gradient(180deg, #151a28 0%, var(--card) 100%);
