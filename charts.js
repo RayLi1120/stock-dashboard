@@ -382,6 +382,44 @@ function predOutcomeChip(key) {
     record ${hits}/${mine.length}</span>`;
 }
 
+// Trading-trainer chart: shown candles, with the future hidden (a "?" zone) until
+// revealed. On reveal the future candles draw past a dashed divider, faintly haloed.
+function trainerChart(shown, future, revealed, w = 1180, h = 460) {
+  const mR = 60, mB = 26, mT = 12;
+  const all = revealed ? shown.concat(future) : shown;
+  const futZoneCols = revealed ? future.length : future.length; // reserve space either way
+  const n = shown.length + futZoneCols;
+  let lo = Math.min(...all.map(c => c.l)), hi = Math.max(...all.map(c => c.h));
+  const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
+  const slot = (w - mR) / n, cw = Math.min(slot * 0.6, 22);
+  const x = i => i * slot + slot / 2;
+  const y = v => mT + (1 - (v - lo) / (hi - lo)) * (h - mT - mB);
+  let out = "";
+  for (let g = 0; g <= 4; g++) {
+    const v = lo + ((hi - lo) * g) / 4, gy = y(v);
+    out += `<line x1="0" x2="${w - mR}" y1="${gy}" y2="${gy}" stroke="#1f2535"/>
+            <text x="${w - 4}" y="${gy + 4}" text-anchor="end" class="axis">${fmt(v)}</text>`;
+  }
+  const drawCandle = (c, i, ghost) => {
+    const col = c.c >= c.o ? GREEN : RED, cx = x(i);
+    const o = ghost ? 0.95 : 1;
+    let s = `<line x1="${cx}" x2="${cx}" y1="${y(c.h)}" y2="${y(c.l)}" stroke="${col}" stroke-width="1.4" opacity="${o}"/>`;
+    s += `<rect x="${cx - cw / 2}" y="${y(Math.max(c.o, c.c))}" width="${cw}" height="${Math.max(y(Math.min(c.o, c.c)) - y(Math.max(c.o, c.c)), 1.5)}" rx="2" fill="${col}" opacity="${o}"${ghost ? ` stroke="${col}" stroke-width="1"` : ""}/>`;
+    return s;
+  };
+  shown.forEach((c, i) => { out += drawCandle(c, i, false); });
+  const divX = shown.length * slot;
+  out += `<line x1="${divX}" x2="${divX}" y1="${mT}" y2="${h - mB}" stroke="#3a4258" stroke-width="1.5" stroke-dasharray="5 5"/>`;
+  if (revealed) {
+    future.forEach((c, i) => { out += drawCandle(c, shown.length + i, true); });
+    out += `<text x="${divX + 8}" y="${mT + 14}" class="axis pred-tag">actual next ${future.length}</text>`;
+  } else {
+    out += `<text x="${(divX + w - mR) / 2}" y="${(mT + h - mB) / 2}" text-anchor="middle" fill="#3a4258" font-size="34" font-weight="800">?</text>`;
+    out += `<text x="${(divX + w - mR) / 2}" y="${(mT + h - mB) / 2 + 24}" text-anchor="middle" class="axis">next ${future.length} bars</text>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}">${out}</svg>`;
+}
+
 // Tiny close-price sparkline (used by the discovery cards).
 function sparkline(closes, color, w = 300, h = 64) {
   const min = Math.min(...closes), max = Math.max(...closes);

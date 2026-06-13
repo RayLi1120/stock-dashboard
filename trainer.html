@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trading Trainer</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🎯</text></svg>">
+<script>document.write(`<link rel="stylesheet" href="style.css?v=${Date.now()}">`);</script>
+</head>
+<body>
+<a class="back" href="index.html">← Back to dashboard</a>
+<div class="detail-head" style="margin-bottom:10px">
+  <div class="eyebrow">Practice mode</div>
+  <h1>🎯 Trading Trainer</h1>
+</div>
+<div class="sub" id="trainerStats" style="margin-bottom:18px"></div>
+
+<div class="panel wide" style="--i:0">
+  <h2>Read the setup <small id="setupMeta" style="color:var(--muted);font-weight:450;text-transform:none;letter-spacing:0"></small></h2>
+  <div id="trainerChart"></div>
+
+  <div id="answerArea">
+    <p class="t-prompt">The last <b id="futN">5</b> bars are hidden. Over those bars, does price <b>rise</b> or <b>decline</b> from the divider? Pick your call, then write the read that justifies it.</p>
+    <div class="t-calls">
+      <button class="t-btn t-rise" id="btnRise">▲ Rise</button>
+      <button class="t-btn t-decline" id="btnDecline">▼ Decline</button>
+    </div>
+    <textarea id="userText" class="t-text" placeholder="Your analysis: what in the chart supports your call? (e.g. trend, support/resistance, RSI, volume, the pattern you see). Write in English or 中文 — both work."></textarea>
+    <button class="t-submit" id="btnSubmit" disabled>Reveal outcome & get coached</button>
+  </div>
+
+  <div id="resultArea" hidden></div>
+</div>
+
+<script>
+["training.js", "charts.js"].forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
+</script>
+<script>
+const KEY = "trainer_stats_v1";
+const stats = JSON.parse(localStorage.getItem(KEY) || '{"n":0,"correct":0,"goodProcess":0,"journal":[]}');
+let cur = null, call = null;
+
+function saveStats() { localStorage.setItem(KEY, JSON.stringify(stats)); }
+function renderStats() {
+  const el = document.getElementById("trainerStats");
+  if (!stats.n) { el.textContent = "No reps yet — your accuracy and process score build as you practice. Process (your reasoning) matters more than the call."; return; }
+  const acc = Math.round(100 * stats.correct / stats.n);
+  const proc = Math.round(100 * stats.goodProcess / stats.n);
+  el.innerHTML = `Reps <b>${stats.n}</b> · direction called right <b class="${acc>=55?"up":"down"}">${acc}%</b> · sound-process rate <b>${proc}%</b>. Remember: a wrong call with good process beats a lucky right one.`;
+}
+
+// ---- concept taxonomy (EN + 中文) ----
+const CONCEPTS = [
+  {k:"support",   re:/support|支撐|撐住|低點/i},
+  {k:"resistance",re:/resist|壓力|阻力|高點|頸線/i},
+  {k:"breakout",  re:/break ?out|breakthrough|突破|站上/i},
+  {k:"trend",     re:/trend|趨勢|上升|下降|多頭|空頭/i},
+  {k:"momentum",  re:/momentum|動能|力道/i},
+  {k:"volume",    re:/volume|量|成交量|爆量|窒息量/i},
+  {k:"rsi",       re:/rsi|overbought|oversold|超買|超賣|相對強弱/i},
+  {k:"ma",        re:/moving average|\bma\b|均線|月線|季線|金叉|死叉/i},
+  {k:"reversal",  re:/revers|反轉|轉折|背離|diverg/i},
+  {k:"pattern",   re:/double top|double bottom|head.?and.?shoulders|flag|triangle|wedge|雙頂|雙底|頭肩|旗形|三角|楔形/i},
+  {k:"consolidation",re:/consolidat|range|sideways|盤整|箱型|橫盤/i},
+  {k:"pullback",  re:/pull ?back|retrace|回檔|回測|拉回/i},
+];
+
+function detect(text) {
+  const found = new Set();
+  CONCEPTS.forEach(c => { if (c.re.test(text)) found.add(c.k); });
+  return found;
+}
+
+function newSetup() {
+  cur = TRAINING.samples[Math.floor(Math.random() * TRAINING.samples.length)];
+  call = null;
+  document.getElementById("futN").textContent = cur.future.length;
+  document.getElementById("setupMeta").textContent = `${cur.market} market · ${TRAINING.shownBars} bars shown · symbol & dates hidden`;
+  document.getElementById("trainerChart").innerHTML = trainerChart(cur.shown, cur.future, false);
+  document.getElementById("answerArea").hidden = false;
+  document.getElementById("resultArea").hidden = true;
+  document.getElementById("userText").value = "";
+  document.getElementById("btnSubmit").disabled = true;
+  ["btnRise","btnDecline"].forEach(id => document.getElementById(id).classList.remove("sel"));
+}
+
+function pick(c) {
+  call = c;
+  document.getElementById("btnRise").classList.toggle("sel", c === "rise");
+  document.getElementById("btnDecline").classList.toggle("sel", c === "decline");
+  document.getElementById("btnSubmit").disabled = false;
+}
+
+// ---- the coach ----
+function coach(sample, userCall, text) {
+  const o = sample.outcome, ctx = sample.ctx;
+  const right = userCall === o.dir;
+  const concepts = detect(text);
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+
+  // which mentioned concepts were actually present / aligned
+  const present = {
+    support: ctx.nearLow, resistance: ctx.nearHigh,
+    breakout: ctx.nearHigh, trend: ctx.trend !== "range",
+    momentum: ctx.trend !== "range", volume: ctx.volTrend !== "flat",
+    rsi: ctx.rsi >= 70 || ctx.rsi <= 30, ma: ctx.stack !== "mixed",
+    reversal: ctx.nearHigh || ctx.nearLow, consolidation: ctx.trend === "range",
+    pullback: ctx.trend !== "range",
+  };
+  const hits = [...concepts].filter(c => present[c]);
+  const miss = [...concepts].filter(c => c !== "pattern" && present[c] === false);
+  // contradictions: claimed oversold while overbought etc.
+  const contradictions = [];
+  if (/overbought|超買/i.test(text) && ctx.rsi < 60) contradictions.push(`you called it overbought, but RSI was ${ctx.rsi}`);
+  if (/oversold|超賣/i.test(text) && ctx.rsi > 40) contradictions.push(`you called it oversold, but RSI was ${ctx.rsi}`);
+
+  // process quality: cited present signals, low contradiction, some substance
+  const processScore = hits.length - contradictions.length + (words >= 12 ? 1 : 0);
+  const goodProcess = processScore >= 2 && contradictions.length === 0;
+
+  let verdict, vClass;
+  if (right && goodProcess) { verdict = "Right call, and your reasoning held up."; vClass = "v-good"; }
+  else if (right && !goodProcess) { verdict = "Right call — but the reasoning was thin, so this may be luck more than skill."; vClass = "v-ok"; }
+  else if (!right && goodProcess) { verdict = "Wrong call, but the process was sound — this is a normal, well-earned loss. Keep this read."; vClass = "v-ok"; }
+  else { verdict = "Missed it, and the reasoning left the key signal out. That's the rep to learn from."; vClass = "v-bad"; }
+
+  let html = `<div class="t-verdict ${vClass}">${verdict}</div>`;
+  // actual outcome
+  const ar = o.dir === "rise" ? "up" : "down";
+  html += `<div class="t-outcome">Actual: price <b class="${ar}">${o.dir === "rise" ? "rose" : "declined"} ${o.pct >= 0 ? "+" : ""}${o.pct}%</b> over the next ${sample.future.length} bars `
+        + `(swing high +${o.maxUp}% / low ${o.maxDn}%). Your call: <b class="${userCall===o.dir?"up":"down"}">${userCall}</b> — ${right ? "correct ✓" : "incorrect ✗"}.</div>`;
+
+  // what was actually there
+  html += `<div class="t-section"><b>What the chart actually showed at the divider</b><ul class="t-list">`
+        + `<li>RSI14 ${ctx.rsi} ${ctx.rsi>=70?"(overbought)":ctx.rsi<=30?"(oversold)":"(neutral)"}, MA stack <b>${ctx.stack}</b>, volume <b>${ctx.volTrend}</b>, ${ctx.trend}-trend${ctx.nearHigh?", pressing the recent high":ctx.nearLow?", on the recent low":""}.</li>`
+        + (ctx.signals.length ? ctx.signals.map(s => `<li>${s}</li>`).join("") : "")
+        + `<li><b>Dominant factor:</b> ${ctx.dominant}.</li></ul></div>`;
+
+  // coaching on their words
+  html += `<div class="t-section"><b>On your read</b><ul class="t-list">`;
+  if (hits.length) html += `<li class="ok">You correctly leaned on: ${hits.join(", ")} — those were genuinely present.</li>`;
+  contradictions.forEach(c => html += `<li class="bad">Contradiction: ${c}.</li>`);
+  // did they name the dominant factor?
+  const namedDominant = (ctx.nearHigh && concepts.has("breakout")) || (ctx.nearLow && concepts.has("support"))
+    || (ctx.stack !== "mixed" && (concepts.has("trend")||concepts.has("ma"))) || (ctx.rsi>=70 && concepts.has("rsi"));
+  if (!namedDominant) html += `<li class="bad">You didn't name the dominant factor — ${ctx.dominant}. That's the lens that would have framed this best.</li>`;
+  else html += `<li class="ok">You keyed on the dominant factor — that's exactly the right instinct.</li>`;
+  if (words < 12) html += `<li>Push your write-ups longer: name the signal, what it implies, and your invalidation. One line isn't a thesis.</li>`;
+  html += `</ul></div>`;
+
+  // one sharpen tip
+  const tips = [];
+  if (ctx.trend === "range") tips.push("In a range like this, edges are coin-flips — the skill is sizing down or standing aside, not forcing a call.");
+  if (ctx.nearHigh) tips.push("At a high test, the question is always: breakout on volume, or rejection? Volume is the tiebreaker — check it first.");
+  if (ctx.nearLow) tips.push("On a low test, separate 'bounce' from 'bottom' — a bounce is a trade, a bottom is a thesis. Don't confuse them.");
+  if (Math.abs(o.maxUp) > 3 && Math.abs(o.maxDn) > 3) tips.push("Note the path: it swung both ways before settling. Your stop placement would have decided whether you survived to be right.");
+  if (!tips.length) tips.push("Write your invalidation level every time — 'I'm wrong if it closes below X.' A read without an exit isn't actionable.");
+  html += `<div class="t-tip">🎯 Sharpen: ${tips[Math.floor(Math.random()*tips.length)]}</div>`;
+
+  // handoff to real Claude
+  const prompt = `Please coach my trading analysis like a mentor — judge my reasoning, not just the call.\n\nSETUP (anonymized ${sample.market} daily chart): at the decision bar, RSI14 was ${ctx.rsi}, MA stack ${ctx.stack}, volume ${ctx.volTrend}, ${ctx.trend}-trend${ctx.nearHigh?", pressing the recent high":ctx.nearLow?", on the recent low":""}. Signals present: ${ctx.signals.join("; ")||"none strong"}.\nMY CALL: ${userCall}.\nMY ANALYSIS: ${text||"(none written)"}\nACTUAL OUTCOME: price ${o.dir} ${o.pct}% over the next ${sample.future.length} bars (swing +${o.maxUp}%/${o.maxDn}%).\n\nTell me what I read well, what I missed, and the single biggest thing to sharpen.`;
+  html += `<div class="t-handoff">
+    <button class="t-copy" onclick='navigator.clipboard.writeText(${JSON.stringify(prompt)}).then(()=>{this.textContent="✓ Copied — paste into a Claude chat";})'>📋 Get Claude's deeper coaching</button>
+    <span class="t-handoff-note">Copies this rep to your clipboard — paste it into a Claude chat for my full personal review (the live site can't call me directly).</span>
+  </div>`;
+
+  html += `<button class="t-submit" id="btnNext">Next setup →</button>`;
+  return { html, right, goodProcess };
+}
+
+function submit() {
+  if (!call) return;
+  const text = document.getElementById("userText").value;
+  const r = coach(cur, call, text);
+  stats.n++; if (r.right) stats.correct++; if (r.goodProcess) stats.goodProcess++;
+  stats.journal.push({ id: cur.id, call, right: r.right, goodProcess: r.goodProcess, at: Date.now() });
+  stats.journal = stats.journal.slice(-200);
+  saveStats(); renderStats();
+  // reveal future on the chart
+  document.getElementById("trainerChart").innerHTML = trainerChart(cur.shown, cur.future, true);
+  document.getElementById("answerArea").hidden = true;
+  const ra = document.getElementById("resultArea");
+  ra.hidden = false; ra.innerHTML = r.html;
+  document.getElementById("btnNext").addEventListener("click", newSetup);
+  ra.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+document.getElementById("btnRise").addEventListener("click", () => pick("rise"));
+document.getElementById("btnDecline").addEventListener("click", () => pick("decline"));
+document.getElementById("btnSubmit").addEventListener("click", submit);
+renderStats();
+newSetup();
+</script>
+</body>
+</html>
