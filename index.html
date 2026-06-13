@@ -26,6 +26,12 @@
 
 <div class="grid" id="grid"></div>
 
+<section class="panel discover" id="discover" hidden>
+  <h2>🔭 Discovery — potentially rising stocks <small id="discMeta"></small></h2>
+  <div class="disc-sub" id="discCriteria"></div>
+  <div class="disc-grid" id="discGrid"></div>
+</section>
+
 <section class="panel scoreboard" id="scoreboard">
   <h2>Prediction scorecard</h2>
   <div id="scorebody"></div>
@@ -35,7 +41,7 @@
 
 <script>
 // cache-bust every load so scheduled-scan updates always come through
-["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "events.js", "charts.js"]
+["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "events.js", "discover.js", "charts.js"]
   .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
 </script>
 <script>
@@ -113,6 +119,30 @@ if (typeof EVENTS !== "undefined") {
         <b>${when}</b> ${e.d.slice(5)} · ${e.sym ? e.sym + " — " : ""}${e.t}${e.est ? " ≈" : ""}</span>`;
     }).join("");
   }
+}
+
+if (typeof DISCOVER !== "undefined" && DISCOVER.picks && DISCOVER.picks.length) {
+  document.getElementById("discover").hidden = false;
+  document.getElementById("discMeta").textContent =
+    `scanned ${DISCOVER.universe} names · ${DISCOVER.generated}`;
+  document.getElementById("discCriteria").textContent =
+    "Ranked off " + DISCOVER.criteria + ". Beyond your watchlist — candidates to research, not recommendations.";
+  document.getElementById("discGrid").innerHTML = DISCOVER.picks.map((p, idx) => {
+    const up = p.chg1d >= 0;
+    const col = p.score >= 80 ? GREEN : p.score >= 65 ? "#f0b90b" : "#6c8cff";
+    const tvUrl = `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(p.tv)}`;
+    return `<div class="disc-card" style="--i:${idx}">
+      <div class="disc-top">
+        <span class="disc-rank" style="color:${col}">${p.score.toFixed(0)}</span>
+        <span class="disc-name">${p.name}<small>${p.sym} · ${p.market}</small></span>
+        <span class="disc-price">${fmt(p.last)} <span class="${up ? "up" : "down"}">${up ? "+" : ""}${p.chg1d}%</span></span>
+      </div>
+      ${sparkline(p.spark, col)}
+      <ul class="disc-ev">${p.ev.map(e => `<li>${e}</li>`).join("")}</ul>
+      ${p.newsNote ? `<div class="disc-news">📰 ${p.newsNote}</div>` : ""}
+      <a class="disc-link" href="${tvUrl}" target="_blank" rel="noopener">Open ${p.tv} on TradingView →</a>
+    </div>`;
+  }).join("");
 }
 
 // Pick up fresh data written by the scheduled scan.

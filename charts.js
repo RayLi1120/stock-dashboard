@@ -382,6 +382,20 @@ function predOutcomeChip(key) {
     record ${hits}/${mine.length}</span>`;
 }
 
+// Tiny close-price sparkline (used by the discovery cards).
+function sparkline(closes, color, w = 300, h = 64) {
+  const min = Math.min(...closes), max = Math.max(...closes);
+  const pad = (max - min) * 0.1 || 1;
+  const lo = min - pad, hi = max + pad;
+  const x = i => (i / (closes.length - 1)) * (w - 6) + 3;
+  const y = v => h - 4 - ((v - lo) / (hi - lo)) * (h - 8);
+  const pts = closes.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="${x(closes.length - 1)}" cy="${y(closes[closes.length - 1])}" r="3" fill="${color}"/>
+  </svg>`;
+}
+
 // Prediction Gap chart: the last ~11 daily candles with graded guesses overlaid —
 // dashed bracket = my predicted range, amber tick = my predicted close, colored band =
 // the gap between predicted close and the real close, labeled with the miss %.
