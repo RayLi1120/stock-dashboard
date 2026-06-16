@@ -268,6 +268,32 @@ footer { margin-top: 36px; color: var(--muted); font-size: 12.5px; }
 .t-copy:hover { background: rgba(108,140,255,.1); }
 .t-handoff-note { font-size: 12px; color: var(--muted); max-width: 420px; }
 
+.senators { margin-top: 28px; animation: rise 0.6s var(--ease-out) both; }
+.senators h2 small { font-weight: 450; color: var(--muted); font-size: 13px; text-transform: none; letter-spacing: 0; }
+.sen-note { color: var(--muted); font-size: 12.5px; margin: 4px 0 16px; max-width: 920px; line-height: 1.5; }
+.sen-cols { display: grid; grid-template-columns: 1.6fr 1fr; gap: 22px; }
+@media (max-width: 800px) { .sen-cols { grid-template-columns: 1fr; } }
+.sen-h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 10px; }
+.sen-h3 small { text-transform: none; letter-spacing: 0; }
+.sen-trade, .sen-top {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 9px 12px; border: 1px solid var(--border); border-radius: 9px; margin-bottom: 8px;
+  background: #131722; font-size: 13px;
+}
+.sen-trade.sen-sample { opacity: 0.72; border-style: dashed; }
+.sen-side { font-weight: 700; font-size: 11px; padding: 2px 7px; border-radius: 5px; }
+.sen-side.up { background: #0f2018; }
+.sen-side.down { background: #201213; }
+.sen-tkr { font-weight: 700; font-variant-numeric: tabular-nums; min-width: 52px; }
+.sen-tkr.sen-watch { color: var(--accent); }
+.sen-amt { font-variant-numeric: tabular-nums; color: #e6c068; font-weight: 600; }
+.sen-pol { color: #cdd3e0; }
+.sen-pol i { font-style: normal; font-weight: 700; margin-right: 4px; }
+.sen-date { color: var(--muted); font-size: 12px; margin-left: auto; font-variant-numeric: tabular-nums; }
+.sen-tnote { width: 100%; color: var(--muted); font-size: 12px; }
+.sen-vol { margin-left: auto; font-variant-numeric: tabular-nums; color: #e6c068; font-weight: 600; }
+.sen-cnt { color: var(--muted); font-size: 12px; min-width: 84px; text-align: right; }
+
 .panel.wide { margin-top: 24px; }
 .panel.wide svg { width: 100%; height: auto; }
 .struct-note { margin-top: 12px; font-size: 12.5px; color: var(--muted); line-height: 1.55; }

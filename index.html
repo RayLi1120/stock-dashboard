@@ -38,6 +38,21 @@
   <div id="scorebody"></div>
 </section>
 
+<section class="panel senators" id="senators" hidden>
+  <h2>🏛️ Congress big trades <small>— disclosed stock trades over $1M</small> <small id="senMeta"></small></h2>
+  <div class="sen-note" id="senNote"></div>
+  <div class="sen-cols">
+    <div>
+      <h3 class="sen-h3">Recent trades ≥ $1M</h3>
+      <div id="senTrades"></div>
+    </div>
+    <div>
+      <h3 class="sen-h3">Top traders <small>(12-mo volume)</small></h3>
+      <div id="senTop"></div>
+    </div>
+  </div>
+</section>
+
 <a class="train-cta" href="trainer.html">
   <div class="train-cta-icon">🎯</div>
   <div class="train-cta-body">
@@ -50,7 +65,7 @@
 
 <script>
 // cache-bust every load so scheduled-scan updates always come through
-["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "events.js", "discover.js", "discovery_log.js", "charts.js"]
+["data.js", "analysis.js", "predictions.js", "news.js", "alerts.js", "scorecard.js", "events.js", "discover.js", "discovery_log.js", "senators.js", "charts.js"]
   .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
 </script>
 <script>
@@ -165,6 +180,35 @@ if (typeof DISCOVER !== "undefined" && DISCOVER.picks && DISCOVER.picks.length) 
       <a class="disc-link" href="${tvUrl}" target="_blank" rel="noopener">Open ${p.tv} on TradingView →</a>
     </div>`;
   }).join("");
+}
+
+if (typeof SENATORS !== "undefined" && (SENATORS.trades || SENATORS.topTraders)) {
+  document.getElementById("senators").hidden = false;
+  document.getElementById("senMeta").textContent = "· updated " + SENATORS.generated;
+  const anySample = (SENATORS.trades || []).some(t => t.sample);
+  document.getElementById("senNote").innerHTML = SENATORS.note +
+    (anySample ? ' <b style="color:#e8c66a">Some rows are sample data — live disclosures populate on the next scan.</b>' : "");
+  const money = n => n >= 1e6 ? "$" + (n/1e6).toFixed(n>=1e7?0:1) + "M" : "$" + Math.round(n/1e3) + "K";
+  const pcol = p => p === "D" ? "#5a8dee" : p === "R" ? "#ea3943" : "#8b93a7";
+  const watch = new Set(["NVDA","AAPL","TSM","2344","2337","6770","1307"]);
+  document.getElementById("senTrades").innerHTML = (SENATORS.trades || []).map(t => {
+    const buy = t.side === "buy";
+    const hit = watch.has(t.ticker);
+    return `<div class="sen-trade${t.sample?" sen-sample":""}">
+      <span class="sen-side ${buy?"up":"down"}">${buy?"BUY":"SELL"}</span>
+      <span class="sen-tkr${hit?" sen-watch":""}">${t.ticker}${hit?" ★":""}</span>
+      <span class="sen-amt">${money(t.sizeLow)}–${money(t.sizeHigh)}</span>
+      <span class="sen-pol"><i style="color:${pcol(t.party)}">${t.party}</i> ${t.politician} · ${t.chamber}</span>
+      <span class="sen-date">${t.date}</span>
+      ${t.note?`<span class="sen-tnote">${t.note}</span>`:""}
+    </div>`;
+  }).join("") || '<div class="sen-note">No ≥$1M trades recorded yet — the scan will add them.</div>';
+  document.getElementById("senTop").innerHTML = (SENATORS.topTraders || []).map(t =>
+    `<div class="sen-top">
+      <span class="sen-pol"><i style="color:${pcol(t.party)}">${t.party}</i> ${t.name}</span>
+      <span class="sen-vol">${money(t.volume)}</span>
+      <span class="sen-cnt">${t.trades.toLocaleString()} trades</span>
+    </div>`).join("");
 }
 
 // Pick up fresh data written by the scheduled scan.
