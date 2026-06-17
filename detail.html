@@ -157,15 +157,21 @@ if (!s || !a || !p) {
     const rcol = Math.abs(st.rangeHit - 70) <= 12 ? GREEN : MA5C;
     const ncol = nx.dir === "rise" ? GREEN : RED;
     const biasTxt = st.bias > 0.05 ? `runs ${st.bias}% low` : st.bias < -0.05 ? `runs ${Math.abs(st.bias)}% high` : "≈ unbiased";
+    const gb = me.gapBehavior;
+    const gbCol = gb === "continue" ? GREEN : gb === "fade" ? RED : FLAT;
+    const gbTxt = gb === "continue" ? "gaps continue ↗" : gb === "fade" ? "gaps fade ↘" : "gap-neutral";
+    const lastGapTxt = Math.abs(me.lastGapPct) >= 1 ? ` · today ${me.lastGapPct >= 0 ? "+" : ""}${me.lastGapPct}%` : "";
     document.getElementById("gapChips").innerHTML = `
       <span class="chip" title="held-out bars the model never trained on">Out-of-sample <b>${st.n}</b> bars</span>
       <span class="chip">Direction <b style="color:${dcol}">${st.dirAcc}%</b></span>
       <span class="chip">Avg close miss <b style="color:${mcol}">${st.mae}%</b> (${biasTxt})</span>
       <span class="chip">Range caught close <b style="color:${rcol}">${st.rangeHit}%</b></span>
+      <span class="chip" title="Whether this stock's opening gaps historically continue or fill the next day">Gap behavior <b style="color:${gbCol}">${gbTxt}</b>${lastGapTxt}</span>
       <span class="chip">Next-bar call <b style="color:${ncol}">${nx.dir === "rise" ? "▲" : "▼"} ${fmt(nx.predC)}</b> ${nx.pct >= 0 ? "+" : ""}${nx.pct}% · ${fmt(nx.predL)}–${fmt(nx.predH)}</span>`;
+    const gbSentence = gb === "continue" ? "Its opening gaps historically tend to <b>continue</b> the next day (gap-and-go)." : gb === "fade" ? "Its opening gaps historically tend to <b>fade / fill</b> the next day." : "Opening gaps carry no reliable next-day signal here.";
     calEl.innerHTML = `<span class="cal-tag">Model · learned from ${me.bars} past bars</span>
-      Weights grid-searched on a training split: trend ×${wts.wd}, momentum ×${wts.wm}, mean-reversion ×${wts.wr}, debias ${(wts.bias * 100).toFixed(2)}%, range k=${wts.k}.
-      The stats above are then measured on later, unseen bars — so they're an honest track record, not a curve-fit.`;
+      Weights grid-searched on a training split: trend ×${wts.wd}, momentum ×${wts.wm}, mean-reversion ×${wts.wr}, gap ×${wts.wg}, debias ${(wts.bias * 100).toFixed(2)}%, range k=${wts.k}. ${gbSentence}
+      Stats above are measured on later, unseen bars — an honest track record, not a curve-fit.`;
     calEl.hidden = false;
     document.getElementById("gapNote").textContent =
       "Each amber tick is the close the model forecast for that day using ONLY the bars before it (walk-forward, no lookahead); the dashed bracket is its predicted range; the colored band is the gap to the real close (green ≤1% miss, amber ≤3%, red beyond); ✓/✗ = direction. The right-edge dashed marker is the model's call for the next session.";
