@@ -1,7 +1,7 @@
 // Machine-managed alert log. Strict JSON body — written by check_alerts.py.
 const ALERTS = {
- "generated": "2026-06-13 02:16",
- "newCount": 1,
+ "generated": "2026-06-17 14:51",
+ "newCount": 0,
  "items": [
   {
    "at": "2026-06-12 18:25",
