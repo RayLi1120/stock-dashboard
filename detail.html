@@ -146,7 +146,7 @@ if (!s || !a || !p) {
       `Swings confirm 3 bars late (walk-forward, no lookahead); fills at signal-day close; no costs; long-only. Span ${bt.span[0]} → ${bt.span[1]}. ` + verdict;
   }
 
-  const me = typeof MODEL_EVAL !== "undefined" && MODEL_EVAL[key];
+  const me = (typeof MODEL_EVAL !== "undefined" && MODEL_EVAL.stocks) ? MODEL_EVAL.stocks[key] : null;
   const calEl = document.getElementById("gapCal");
   if (me && !me.insufficient) {
     const gap = predictionGapChart(s.candles, me.recent, me.next);
@@ -169,9 +169,11 @@ if (!s || !a || !p) {
       <span class="chip" title="Whether this stock's opening gaps historically continue or fill the next day">Gap behavior <b style="color:${gbCol}">${gbTxt}</b>${lastGapTxt}</span>
       <span class="chip">Next-bar call <b style="color:${ncol}">${nx.dir === "rise" ? "▲" : "▼"} ${fmt(nx.predC)}</b> ${nx.pct >= 0 ? "+" : ""}${nx.pct}% · ${fmt(nx.predL)}–${fmt(nx.predH)}</span>`;
     const gbSentence = gb === "continue" ? "Its opening gaps historically tend to <b>continue</b> the next day (gap-and-go)." : gb === "fade" ? "Its opening gaps historically tend to <b>fade / fill</b> the next day." : "Opening gaps carry no reliable next-day signal here.";
-    calEl.innerHTML = `<span class="cal-tag">Model · learned from ${me.bars} past bars</span>
-      Weights grid-searched on a training split: trend ×${wts.wd}, momentum ×${wts.wm}, mean-reversion ×${wts.wr}, gap ×${wts.wg}, debias ${(wts.bias * 100).toFixed(2)}%, range k=${wts.k}. ${gbSentence}
-      Stats above are measured on later, unseen bars — an honest track record, not a curve-fit.`;
+    const wEntries = Object.entries(wts).filter(([k2]) => !["bias", "k"].includes(k2)).map(([k2, v]) => `${k2} ×${v}`).join(", ");
+    const md = me.model || {}, wr = md.weekReview;
+    calEl.innerHTML = `<span class="cal-tag">Model ${md.variant || "v1_base"} · v${md.version || 0} · learned from ${me.bars} bars</span>
+      Weights (grid-searched on a training split): ${wEntries}, debias ${(wts.bias * 100).toFixed(2)}%, range k=${wts.k}. ${gbSentence}
+      It re-evolves daily and adopts a new model only when a challenger beats this one out-of-sample${wr ? `; latest weekend 5-day review: dir <b>${wr.dirAcc}%</b>, avg miss <b>${wr.mae}%</b>` : ""}.`;
     calEl.hidden = false;
     document.getElementById("gapNote").textContent =
       "Each amber tick is the close the model forecast for that day using ONLY the bars before it (walk-forward, no lookahead); the dashed bracket is its predicted range; the colored band is the gap to the real close (green ≤1% miss, amber ≤3%, red beyond); ✓/✗ = direction. The right-edge dashed marker is the model's call for the next session.";

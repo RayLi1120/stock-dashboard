@@ -1,0 +1,42 @@
+{
+ "perStock": {
+  "2344": {
+   "variant": "v1_base",
+   "mae": 4.7,
+   "version": 0,
+   "evolvedAt": "2026-06-17"
+  },
+  "2337": {
+   "variant": "v1_base",
+   "mae": 4.82,
+   "version": 0,
+   "evolvedAt": "2026-06-17"
+  },
+  "6770": {
+   "variant": "v1_base",
+   "mae": 3.98,
+   "version": 0,
+   "evolvedAt": "2026-06-17"
+  },
+  "1307": {
+   "variant": "v1_base",
+   "mae": 1.57,
+   "version": 0,
+   "evolvedAt": "2026-06-17"
+  },
+  "NVDA": {
+   "variant": "v1_base",
+   "mae": 1.95,
+   "version": 0,
+   "evolvedAt": "2026-06-17"
+  },
+  "AAPL": {
+   "variant": "v1_base",
+   "mae": 1.01,
+   "version": 0,
+   "evolvedAt": "2026-06-17"
+  }
+ },
+ "log": [],
+ "lastEvolve": "2026-06-17"
+}
