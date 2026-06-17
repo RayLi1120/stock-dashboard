@@ -37,7 +37,7 @@
 </div>
 
 <div class="panel wide" style="--i:3" id="gapPanel">
-  <h2>Prediction gap — my guesses vs the real closes</h2>
+  <h2>Prediction gap — model forecast vs real closes</h2>
   <div class="chips-row" id="gapChips"></div>
   <div id="gapChart"></div>
   <div class="cal-box" id="gapCal" hidden></div>
@@ -62,7 +62,7 @@
 
 <script>
 // cache-bust every load so scheduled-scan updates always come through
-["data.js", "structure.js", "backtest.js", "analysis.js", "predictions.js", "news.js", "scorecard.js", "calibration.js", "charts.js"]
+["data.js", "structure.js", "backtest.js", "analysis.js", "predictions.js", "news.js", "model_eval.js", "charts.js"]
   .forEach(f => document.write(`<script src="${f}?v=${Date.now()}"><\/script>`));
 </script>
 <script>
@@ -146,40 +146,36 @@ if (!s || !a || !p) {
       `Swings confirm 3 bars late (walk-forward, no lookahead); fills at signal-day close; no costs; long-only. Span ${bt.span[0]} → ${bt.span[1]}. ` + verdict;
   }
 
-  const myEntries = (typeof SCORECARD !== "undefined" && SCORECARD.entries || []).filter(e => e.sym === key);
-  const gap = predictionGapChart(s.candles, myEntries);
-  document.getElementById("gapChart").innerHTML = gap.svg;
-  if (myEntries.length) {
-    const misses = myEntries.map(e => Math.abs((e.actualC - e.predC) / e.predC) * 100);
-    const avgMiss = misses.reduce((a, b) => a + b, 0) / misses.length;
-    const hits = myEntries.filter(e => e.dirHit).length;
-    const ranged = myEntries.filter(e => e.inRange).length;
-    document.getElementById("gapChips").innerHTML = `
-      <span class="chip">Graded guesses <b>${myEntries.length}</b></span>
-      <span class="chip">Avg close miss <b style="color:${avgMiss <= 1 ? GREEN : avgMiss <= 3 ? MA5C : RED}">${avgMiss.toFixed(1)}%</b></span>
-      <span class="chip">Direction <b>${hits}/${myEntries.length}</b></span>
-      <span class="chip">Range caught close <b>${ranged}/${myEntries.length}</b></span>`;
-  }
-  const cal = typeof CALIBRATION !== "undefined" && CALIBRATION.perSymbol && CALIBRATION.perSymbol[key];
+  const me = typeof MODEL_EVAL !== "undefined" && MODEL_EVAL[key];
   const calEl = document.getElementById("gapCal");
-  if (cal && cal.active) {
-    const dcol = cal.dirAcc >= 60 ? GREEN : cal.dirAcc >= 45 ? MA5C : RED;
-    const bias = cal.closeBias > 0 ? `too low by ${cal.closeBias}%` : cal.closeBias < 0 ? `too high by ${Math.abs(cal.closeBias)}%` : "unbiased";
-    const adj = [];
-    if (cal.closeBiasAdj) adj.push(`close ${cal.closeBiasAdj > 0 ? "+" : ""}${cal.closeBiasAdj}%`);
-    if (cal.rangeMult !== 1) adj.push(`range ×${cal.rangeMult}`);
-    calEl.innerHTML = `<span class="cal-tag">Self-calibration · ${cal.n} graded</span>
-      Direction <b style="color:${dcol}">${cal.dirAcc}%</b> · my closes run <b>${bias}</b> (avg miss ${cal.closeMAE}%) · range caught <b>${cal.rangeHit}%</b> of closes.
-      ${adj.length ? `<b>Auto-applied to the next guess:</b> ${adj.join(", ")}.` : "Predictions are well-calibrated — no correction needed."}`;
+  if (me && !me.insufficient) {
+    const gap = predictionGapChart(s.candles, me.recent, me.next);
+    document.getElementById("gapChart").innerHTML = gap.svg;
+    const st = me.stats, nx = me.next, wts = me.weights;
+    const dcol = st.dirAcc >= 55 ? GREEN : st.dirAcc >= 48 ? MA5C : RED;
+    const mcol = st.mae <= 2 ? GREEN : st.mae <= 4 ? MA5C : RED;
+    const rcol = Math.abs(st.rangeHit - 70) <= 12 ? GREEN : MA5C;
+    const ncol = nx.dir === "rise" ? GREEN : RED;
+    const biasTxt = st.bias > 0.05 ? `runs ${st.bias}% low` : st.bias < -0.05 ? `runs ${Math.abs(st.bias)}% high` : "≈ unbiased";
+    document.getElementById("gapChips").innerHTML = `
+      <span class="chip" title="held-out bars the model never trained on">Out-of-sample <b>${st.n}</b> bars</span>
+      <span class="chip">Direction <b style="color:${dcol}">${st.dirAcc}%</b></span>
+      <span class="chip">Avg close miss <b style="color:${mcol}">${st.mae}%</b> (${biasTxt})</span>
+      <span class="chip">Range caught close <b style="color:${rcol}">${st.rangeHit}%</b></span>
+      <span class="chip">Next-bar call <b style="color:${ncol}">${nx.dir === "rise" ? "▲" : "▼"} ${fmt(nx.predC)}</b> ${nx.pct >= 0 ? "+" : ""}${nx.pct}% · ${fmt(nx.predL)}–${fmt(nx.predH)}</span>`;
+    calEl.innerHTML = `<span class="cal-tag">Model · learned from ${me.bars} past bars</span>
+      Weights grid-searched on a training split: trend ×${wts.wd}, momentum ×${wts.wm}, mean-reversion ×${wts.wr}, debias ${(wts.bias * 100).toFixed(2)}%, range k=${wts.k}.
+      The stats above are then measured on later, unseen bars — so they're an honest track record, not a curve-fit.`;
     calEl.hidden = false;
-  } else if (cal) {
-    calEl.innerHTML = `<span class="cal-tag">Self-calibration</span> ${cal.n}/${CALIBRATION.minN} graded guesses — corrections kick in once enough closes are scored.`;
-    calEl.hidden = false;
+    document.getElementById("gapNote").textContent =
+      "Each amber tick is the close the model forecast for that day using ONLY the bars before it (walk-forward, no lookahead); the dashed bracket is its predicted range; the colored band is the gap to the real close (green ≤1% miss, amber ≤3%, red beyond); ✓/✗ = direction. The right-edge dashed marker is the model's call for the next session.";
+  } else {
+    document.getElementById("gapChart").innerHTML = predictionGapChart(s.candles, [], null).svg;
+    document.getElementById("gapChips").innerHTML = `<span class="chip">Not enough history yet</span>`;
+    calEl.hidden = true;
+    document.getElementById("gapNote").textContent =
+      "This name has too few sessions for a walk-forward model (needs ~80 daily bars) — common right after an IPO. It populates automatically as history accumulates.";
   }
-
-  document.getElementById("gapNote").textContent = gap.marks
-    ? "Solid candles = what actually happened. Amber tick = the close I guessed the scan before; dashed bracket = my guessed range; the colored band is the gap between my guess and reality (green ≤1% miss, amber ≤3%, red beyond), ✓/✗ = direction call. One guess is graded per trading day."
-    : "Solid candles = the last sessions. My guess markers appear here as predictions get graded against each new close (one per trading day, scans run 3×/day on weekdays) — first grades land at the next scan after a close.";
 
   // Pick up fresh data written by the scheduled scan.
   setTimeout(() => location.reload(), 10 * 60 * 1000);

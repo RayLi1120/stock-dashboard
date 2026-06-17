@@ -437,53 +437,45 @@ function sparkline(closes, color, w = 300, h = 64) {
 // Prediction Gap chart: the last ~11 daily candles with graded guesses overlaid —
 // dashed bracket = my predicted range, amber tick = my predicted close, colored band =
 // the gap between predicted close and the real close, labeled with the miss %.
-function predictionGapChart(candles, entries, w = 1240, h = 400) {
+function predictionGapChart(candles, recent, next, w = 1240, h = 400) {
   const cs = candles.slice(-11);
   const byDate = {};
-  (entries || []).forEach(e => { byDate[e.actualDate] = e; });
+  (recent || []).forEach(e => { byDate[e.d] = e; });
   const marks = cs.map((c, i) => byDate[c.d] ? { i, c, e: byDate[c.d] } : null).filter(Boolean);
-  const mR = 64, mB = 40, mT = 12;
+  const mR = 64, mB = 40, mT = 14;
+  const slots = cs.length + (next ? 1 : 0);
   let lo = Math.min(...cs.map(c => c.l)), hi = Math.max(...cs.map(c => c.h));
   marks.forEach(m => { lo = Math.min(lo, m.e.predL); hi = Math.max(hi, m.e.predH); });
-  const pad = (hi - lo) * 0.07 || 1;
-  lo -= pad; hi += pad;
-  const n = cs.length;
-  const slot = (w - mR) / n, cw = Math.min(slot * 0.45, 34);
+  if (next) { lo = Math.min(lo, next.predL); hi = Math.max(hi, next.predH); }
+  const pad = (hi - lo) * 0.07 || 1; lo -= pad; hi += pad;
+  const slot = (w - mR) / slots, cw = Math.min(slot * 0.42, 30);
   const x = i => slot * i + slot / 2;
   const y = v => mT + (1 - (v - lo) / (hi - lo)) * (h - mT - mB);
   let out = "";
-  for (let g = 0; g <= 4; g++) {
-    const v = lo + ((hi - lo) * g) / 4, gy = y(v);
-    out += `<line x1="0" x2="${w - mR}" y1="${gy}" y2="${gy}" stroke="#1f2535"/>
-            <text x="${w - 4}" y="${gy + 4}" text-anchor="end" class="axis">${fmt(v)}</text>`;
-  }
-  cs.forEach((c, i) => {
-    const col = c.c >= c.o ? GREEN : RED;
-    const cx = x(i);
+  for (let g = 0; g <= 4; g++) { const v = lo + (hi - lo) * g / 4, gy = y(v);
+    out += `<line x1="0" x2="${w - mR}" y1="${gy}" y2="${gy}" stroke="#1f2535"/><text x="${w - 4}" y="${gy + 4}" text-anchor="end" class="axis">${fmt(v)}</text>`; }
+  cs.forEach((c, i) => { const col = c.c >= c.o ? GREEN : RED, cx = x(i);
     out += `<line x1="${cx}" x2="${cx}" y1="${y(c.h)}" y2="${y(c.l)}" stroke="${col}" stroke-width="1.5"/>`;
-    out += `<rect x="${cx - cw / 2}" y="${y(Math.max(c.o, c.c))}" width="${cw}"
-             height="${Math.max(y(Math.min(c.o, c.c)) - y(Math.max(c.o, c.c)), 2)}" rx="2" fill="${col}"/>`;
-    out += `<text x="${cx}" y="${h - 22}" text-anchor="middle" class="axis">${c.d}</text>`;
-  });
-  marks.forEach(m => {
-    const e = m.e;
-    const px = x(m.i) + cw * 0.85;
-    const miss = ((e.actualC - e.predC) / e.predC) * 100;
-    const am = Math.abs(miss);
-    const tier = am <= 1 ? GREEN : am <= 3 ? MA5C : RED;
-    // predicted range bracket
-    out += `<line x1="${px}" x2="${px}" y1="${y(e.predH)}" y2="${y(e.predL)}" stroke="${MA5C}" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>`;
-    out += `<line x1="${px - 4}" x2="${px + 4}" y1="${y(e.predH)}" y2="${y(e.predH)}" stroke="${MA5C}" opacity="0.55"/>`;
-    out += `<line x1="${px - 4}" x2="${px + 4}" y1="${y(e.predL)}" y2="${y(e.predL)}" stroke="${MA5C}" opacity="0.55"/>`;
-    // predicted close tick
+    out += `<rect x="${cx - cw / 2}" y="${y(Math.max(c.o, c.c))}" width="${cw}" height="${Math.max(y(Math.min(c.o, c.c)) - y(Math.max(c.o, c.c)), 2)}" rx="2" fill="${col}"/>`;
+    out += `<text x="${cx}" y="${h - 22}" text-anchor="middle" class="axis">${c.d}</text>`; });
+  marks.forEach(m => { const e = m.e, px = x(m.i) + cw * 0.9;
+    const miss = ((e.actualC - e.predC) / e.predC) * 100, am = Math.abs(miss), tier = am <= 1 ? GREEN : am <= 3 ? MA5C : RED;
+    out += `<line x1="${px}" x2="${px}" y1="${y(e.predH)}" y2="${y(e.predL)}" stroke="${MA5C}" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>`;
+    out += `<line x1="${px - 4}" x2="${px + 4}" y1="${y(e.predH)}" y2="${y(e.predH)}" stroke="${MA5C}" opacity="0.5"/>`;
+    out += `<line x1="${px - 4}" x2="${px + 4}" y1="${y(e.predL)}" y2="${y(e.predL)}" stroke="${MA5C}" opacity="0.5"/>`;
     out += `<line x1="${px - 7}" x2="${px + 7}" y1="${y(e.predC)}" y2="${y(e.predC)}" stroke="${MA5C}" stroke-width="2.5"/>`;
-    // the gap band: predicted close → actual close
     const gy1 = y(e.predC), gy2 = y(e.actualC);
-    out += `<rect x="${px - 3}" y="${Math.min(gy1, gy2)}" width="6" height="${Math.max(Math.abs(gy2 - gy1), 1.5)}" fill="${tier}" opacity="0.45" rx="2"/>`;
+    out += `<rect x="${px - 3}" y="${Math.min(gy1, gy2)}" width="6" height="${Math.max(Math.abs(gy2 - gy1), 1.5)}" fill="${tier}" opacity="0.5" rx="2"/>`;
     out += `<circle cx="${px}" cy="${gy2}" r="3" fill="${tier}"/>`;
-    out += `<text x="${px}" y="${Math.min(gy1, gy2) - 7}" text-anchor="middle" class="axis" font-weight="650" fill="${tier}">${miss >= 0 ? "+" : ""}${miss.toFixed(1)}%</text>`;
-    out += `<text x="${px}" y="${h - 6}" text-anchor="middle" class="axis pred-tag">${e.dirHit ? "✓" : "✗"}</text>`;
-  });
+    out += `<text x="${px}" y="${Math.min(gy1, gy2) - 6}" text-anchor="middle" class="axis" font-weight="650" fill="${tier}">${miss >= 0 ? "+" : ""}${miss.toFixed(1)}%</text>`;
+    out += `<text x="${px}" y="${h - 6}" text-anchor="middle" class="axis pred-tag">${e.dirHit ? "✓" : "✗"}</text>`; });
+  if (next) { const cx = x(cs.length), col = next.dir === "rise" ? GREEN : RED;
+    out += `<line x1="${x(cs.length - 1) + slot * 0.5}" x2="${x(cs.length - 1) + slot * 0.5}" y1="${mT}" y2="${h - mB}" stroke="#2a3142" stroke-dasharray="4 4"/>`;
+    out += `<line x1="${cx}" x2="${cx}" y1="${y(next.predH)}" y2="${y(next.predL)}" stroke="${col}" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.85"/>`;
+    out += `<line x1="${cx - 6}" x2="${cx + 6}" y1="${y(next.predC)}" y2="${y(next.predC)}" stroke="${col}" stroke-width="3"/>`;
+    out += `<circle cx="${cx}" cy="${y(next.predC)}" r="3.5" fill="${col}"/>`;
+    out += `<text x="${cx}" y="${h - 22}" text-anchor="middle" class="axis">next?</text>`;
+    out += `<text x="${cx}" y="${h - 6}" text-anchor="middle" class="axis pred-tag">forecast</text>`; }
   return { svg: `<svg viewBox="0 0 ${w} ${h}">${out}</svg>`, marks: marks.length };
 }
 
