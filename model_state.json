@@ -4,39 +4,90 @@
    "variant": "v1_base",
    "mae": 4.71,
    "version": 0,
-   "evolvedAt": "2026-06-17"
+   "evolvedAt": "2026-06-17",
+   "weekReview": {
+    "d": "2026-06-28",
+    "dirAcc": 80,
+    "mae": 4.64
+   }
   },
   "2337": {
    "variant": "v1_base",
    "mae": 4.79,
    "version": 0,
-   "evolvedAt": "2026-06-17"
+   "evolvedAt": "2026-06-17",
+   "weekReview": {
+    "d": "2026-06-28",
+    "dirAcc": 100,
+    "mae": 4.04
+   }
   },
   "6770": {
    "variant": "v1_base",
    "mae": 3.99,
    "version": 0,
-   "evolvedAt": "2026-06-17"
+   "evolvedAt": "2026-06-17",
+   "weekReview": {
+    "d": "2026-06-28",
+    "dirAcc": 40,
+    "mae": 3.14
+   }
   },
   "1307": {
    "variant": "v1_base",
    "mae": 1.57,
    "version": 0,
-   "evolvedAt": "2026-06-17"
+   "evolvedAt": "2026-06-17",
+   "weekReview": {
+    "d": "2026-06-28",
+    "dirAcc": 80,
+    "mae": 1.88
+   }
   },
   "NVDA": {
-   "variant": "v1_base",
-   "mae": 1.96,
-   "version": 0,
-   "evolvedAt": "2026-06-17"
+   "variant": "v4_long",
+   "mae": 1.89,
+   "version": 1,
+   "evolvedAt": "2026-06-20",
+   "log": [
+    {
+     "d": "2026-06-20",
+     "sym": "NVDA",
+     "from": "v1_base",
+     "to": "v4_long",
+     "maeFrom": 1.96,
+     "maeTo": 1.89,
+     "trigger": "weekend"
+    }
+   ],
+   "weekReview": {
+    "d": "2026-06-28",
+    "dirAcc": 60,
+    "mae": 2.4
+   }
   },
   "AAPL": {
    "variant": "v1_base",
    "mae": 1.03,
    "version": 0,
-   "evolvedAt": "2026-06-17"
+   "evolvedAt": "2026-06-17",
+   "weekReview": {
+    "d": "2026-06-28",
+    "dirAcc": 60,
+    "mae": 1.2
+   }
   }
  },
- "log": [],
- "lastEvolve": "2026-06-19"
+ "log": [
+  {
+   "d": "2026-06-20",
+   "sym": "NVDA",
+   "from": "v1_base",
+   "to": "v4_long",
+   "maeFrom": 1.96,
+   "maeTo": 1.89,
+   "trigger": "weekend"
+  }
+ ],
+ "lastEvolve": "2026-07-01"
 }
