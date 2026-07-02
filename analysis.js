@@ -1,64 +1,65 @@
-// Hand-written analysis & next-candle interpretation — Claude, 2026-06-12.
+// Hand-written analysis & next-candle interpretation — Claude, 2026-07-01.
 // Prediction fields are % offsets from the latest close (o/h/l/c of the guessed next candle).
 const ANALYSIS = {
  "2344": {
   bullets: [
    "<b>Thesis:</b> specialty DDR3/DDR4 + NOR flash — direct beneficiary of Micron/SK hynix diverting capacity to HBM/DDR5; DDR4 shortage estimated 19–20%, DRAM contract prices seen +58–63% QoQ.",
-   "<b>Street:</b> Morgan Stanley raised target NT$100 → NT$222 on June 2 (stock hit limit-up NT$184.5 that day); also entered Samsung Electro-Mechanics supply chain.",
-   "<b>Tape:</b> NT$115 (Jan) → ~190 record → 147 crash low (June 8–10) → 172 now. 52-week range 16.5–193: a 10x year.",
-   "<b>Technicals (your chart):</b> A-B-C channel projects D ≈ 190; RSI 65.9 — elevated but not overbought; MACD curling back up.",
-   "<b>Watch:</b> volume on up days (today below average), the ~190 retest, earnings in ~48 days (late July).",
-   "<b>Risk:</b> FOMC June 16–17 — hawkish dots hit this name hardest; it led both the crash and the rebound (highest beta to the AI-memory trade).",
+   "<b>Earnings:</b> Q1 FY2026 was a record — gross margin 53.4%, EPS NT$2.25. CEO Chen Pei-ming said Q2 price hikes will be 'not smaller than Q1' and full-year revenue will hit a new all-time high. Kaohsiung fab doubles to 24,000 wafers/month by year-end.",
+   "<b>Street:</b> Morgan Stanley target NT$222 (Jun 2); stock briefly exceeded it, trading to NT$225 on Jun 26 before retracing to 190.",
+   "<b>Tape:</b> NT$115 (Jan) → 225 new MSH (Jun 26) → 190 now. 52-week range 16.5–225. The stock is testing the old double-top / breakout level as support.",
+   "<b>Watch:</b> whether 190 holds as support; Q2 earnings late July; June monthly revenue Jul 10.",
+   "<b>Risk:</b> hawkish Fed (9 of 18 FOMC officials now see a 2026 hike); any cooling of the DDR4 shortage narrative could cause another violent rotation.",
   ] },
  "2337": {
   bullets: [
-   "<b>Thesis:</b> NOR flash / ROM pure-play — NOR pricing rides the same shortage dynamics as legacy DRAM; Morgan Stanley Overweight (June 2).",
-   "<b>Tape:</b> +5.00% today to 147.0; still ~15% off the NT$173.5 high — the laggard of the trio on this rebound.",
-   "<b>Caution:</b> this name has seen violent institutional rotation before — a prior record-high session saw 43M shares of institutional selling and a -4% day.",
-   "<b>Relative play:</b> if Winbond clears ~190, Macronix catch-up is the natural second-order trade; if Winbond stalls, expect this to stall first.",
-   "<b>Risk:</b> same FOMC binary as the whole list; lower liquidity than 2344 amplifies gaps both ways.",
+   "<b>Thesis:</b> NOR flash / ROM pure-play — NOR pricing rides the same shortage dynamics as legacy DRAM; Morgan Stanley Overweight (Jun 2).",
+   "<b>Tape:</b> Hit a new MSH at NT$192 on Jun 23, then retraced sharply to 143.5 (-25%). Violent rotation — mirrors prior behavior (43M institutional shares sold on a prior record-high day).",
+   "<b>Caution:</b> the pullback is severe enough to suggest active institutional selling, not just profit-taking. Watch the MSL at 132.5 — a break there would be a serious thesis dent.",
+   "<b>Relative play:</b> laggard catch-up to Winbond (which is defending 190 better) is the trade; if Winbond stabilizes, Macronix is the higher-beta bounce. If Winbond fails, avoid.",
+   "<b>Risk:</b> hawkish FOMC overhang; lower liquidity than 2344 amplifies gap risk both ways.",
   ] },
  "6770": {
   bullets: [
-   "<b>Thesis:</b> foundry + memory hybrid; rides the cycle plus a company-specific catalyst.",
-   "<b>Catalyst:</b> Micron signed an LOI to buy PSMC's P5 fab (Tongluo) for <b>US$1.8B cash</b> — validates asset value, injects cash; watch for conversion to a definitive agreement.",
-   "<b>Tape:</b> +4.97% today to 67.3; but -28% from the NT$94.5 high — biggest drawdown of the trio, weakest hands flushed.",
-   "<b>Character:</b> the highest-beta, most retail-driven of the three — expect it to overshoot both directions.",
-   "<b>Risk:</b> deal break or FOMC hawkishness; with the deepest drawdown, it has the least technical support below.",
+   "<b>Thesis:</b> foundry + memory hybrid; rides the DDR4 cycle plus a company-specific catalyst.",
+   "<b>Catalyst resolved:</b> Micron completed acquisition of PSMC's P5 fab (Tongluo) in March 2026 for <b>US$1.8B cash</b> — the cash is in hand, removing deal-break risk. DRAM output at the P5 site expected H2 2027.",
+   "<b>Tape:</b> Hit MSH NT$89.3 on Jun 25, now at 74.3 (-17%). Still 20% above MSL of 62.1. Highest-beta name in the trio.",
+   "<b>Character:</b> most retail-driven of the three — expect it to overshoot in both directions; highest-beta expression of the DDR4 trade.",
+   "<b>Risk:</b> hawkish FOMC; without the ongoing LOI catalyst (now closed), the name needs the cycle to carry it.",
   ] },
  "NVDA": {
   bullets: [
-   "<b>Fundamentals:</b> revenue $82B (+85% YoY), record FCF $49B, fastest ramp ever (Blackwell). The problem was never the business.",
-   "<b>New catalyst (June 11):</b> dividend raised ×25 ($0.01 → $0.25/qtr) + pledge to return ≥50% of FCF — a structural floor under dips.",
-   "<b>Valuation:</b> $4.96T cap, PE ~31 on +85% growth; consensus Strong Buy, average target ~$298 (+45%).",
-   "<b>Context:</b> dragged down with mega-cap tech in the rate scare (SOX -10.26% June 5, +8% June 11) — it trades as a rates instrument short-term.",
-   "<b>Watch:</b> $200 as support, FOMC June 16–17 as the trigger; reclaiming ~$215 opens the gap-fill toward the highs.",
+   "<b>Fundamentals:</b> revenue $82B Q1 FY27 (+85% YoY), Q2 guidance $91B, record FCF $49B (Blackwell ramp). After the 7% monthly selloff, stock trades at 15× next-year earnings — the cheapest it has been relative to growth in years.",
+   "<b>Technicals (warning):</b> broke below the Jun 9 MSL of $199.34 on Jul 1 (slipping 2%+ intraday). Fractal structure has flipped to 'mixed' — short-term bias is down until $199+ is reclaimed.",
+   "<b>Capital return:</b> dividend ×25 ($0.01 → $0.25/qtr) + ≥50% FCF return pledge — a structural floor under deep dips.",
+   "<b>Context:</b> market is rotating INTO memory chips and CPU/semi-equipment names and OUT OF AI mega-caps. This is a style rotation, not an earnings deterioration.",
+   "<b>Watch:</b> support zone $185–$186; reclaiming $199 is the first step to rebuilding momentum. Q2 earnings Aug 26.",
+   "<b>Risk:</b> rate hike expectations (9 of 18 FOMC members) hit the highest-multiple names hardest; sector rotation could persist another 2–4 weeks.",
   ] },
  "1307": {
   bullets: [
    "<b>What it is:</b> San Fang Chemical 三芳化學 — PU synthetic leather, films and elastic fibers for footwear and apparel supply chains (Nike-adjacent sporting-goods materials). A traditional-materials name, not a tech story.",
    "<b>Role in your list:</b> the diversifier — it doesn't trade off FOMC/AI beta like everything else you track; drivers are footwear orders, raw-material (PU/petchem) costs, and TWD.",
-   "<b>Tape:</b> +4.40% today to 36.75, closing at the top of its one-month range (30.6–36.9) — quiet accumulation pattern rather than a news-driven spike.",
-   "<b>Coverage gap:</b> thin analyst/news coverage — technicals matter more here; gaps and breakouts carry more information than headlines.",
-   "<b>Watch:</b> whether the 36.9 monthly-high breakout sticks; monthly revenue prints (TWSE 10th-of-month disclosures) are the main fundamental pulse.",
+   "<b>Tape:</b> hit MSH 38.3 on Jun 16, now at 34.3, pulling back toward the support zone (32–33). The structure still reads 'uptrend' (MSL=32.6 intact). Monthly revenue (TWSE July 10) is the next catalyst.",
+   "<b>Coverage gap:</b> thin analyst/news coverage — technicals and monthly revenue prints are the primary signals.",
+   "<b>Watch:</b> support zone 32–33; July 10 monthly revenue disclosure.",
   ] },
  "AAPL": {
   bullets: [
-   "<b>This week's story:</b> WWDC 2026 (June 8–12) — rebuilt Siri on Apple Intelligence using Apple's own models plus Google Gemini, iOS 27 across the lineup. Market verdict: letdown. Stock fell from ~$301 to ~$290 on the reveal.",
-   "<b>Why the disappointment:</b> no clear AI monetization, reliance on Gemini read as strategic weakness, and the new Siri still trails frontier assistants.",
-   "<b>Leadership:</b> Tim Cook announced this was his final WWDC as CEO — John Ternus (hardware chief) takes over in September. Succession transitions add a discount until the street hears his capital-allocation stance.",
-   "<b>Tape:</b> rebounding +1.4% to ~296 after the post-keynote flush; monthly high 317.4 set in the pre-WWDC run-up is now the overhead reference.",
-   "<b>Bull case from here:</b> Morgan Stanley framed WWDC as the catalyst that 'decides AI positioning' — expectations are now reset low, and Apple's capital-return machine is unmatched; event risk has passed.",
-   "<b>Risk:</b> same FOMC binary as everything else, plus iPhone-cycle dependence — if AI Siri doesn't drive a supercycle, FY27 estimates look stretched.",
+   "<b>Leadership transition:</b> Tim Cook to become Executive Chairman; John Ternus (hardware chief) becomes CEO effective Sep 1, 2026. Succession transitions add a valuation discount until Ternus states his capital-allocation and AI strategy.",
+   "<b>Q2 FY26 (Apr 30):</b> $111.2B revenue (+17% YoY), iPhone $57B (+22%). Business is strong; the discount is strategic, not operational.",
+   "<b>WWDC letdown:</b> rebuilt Siri on Apple Intelligence (own models + Google Gemini) — market read it as strategic weakness. Stock fell ~$301 → ~$290 on the reveal; now at $294.",
+   "<b>Structure bearish:</b> trend=down after MSH $302.42 (Jun 22). AAPL is drifting lower in a sector that has underperformed since the WWDC disappointment.",
+   "<b>Q3 earnings (~late July):</b> the next reset event. iPhone demand and AI monetization commentary will be the key tests for Ternus.",
+   "<b>Risk:</b> FOMC rate-hike risk + AI strategy uncertainty + CEO transition = triple overhang. Bull case: expectations now so low that any positive AI signal from Ternus causes a squeeze.",
   ] },
  "SPCX": {
   bullets: [
-   "<b>What just happened:</b> the largest IPO in history — June 12, 2026: priced $135, raised $75B at a $1.75T valuation, opened $150 (+11%) on 58M shares, popped ~30% intraday. Musk became the world's first trillionaire on the print.",
+   "<b>What it is:</b> the world's largest IPO — June 12, 2026: $135/share, $75B raised, $1.75T valuation. Day-1: opened $150, high $176.5, closed $161. Now at $156.57 (19 sessions in).",
    "<b>The business:</b> Starlink is the only profitable segment and the biggest revenue driver; reusable rockets + Starship are the growth/option value the $1.75T tag is paying for.",
-   "<b>Trading character (weeks 1–4):</b> this is a flow instrument, not a fundamentals one — flippers vs index inclusion demand vs retail FOMO, with Morgan Stanley's stabilization bid guarding the $150 open. Indicators on this dashboard (RSI14, MA20, structure) need ~3–4 weeks of candles to populate.",
-   "<b>Key dates ahead:</b> analyst initiations when the quiet period ends (~mid-July, usually a volatility event), first public earnings (~August), and the ~180-day lockup expiry (~December) — the structural supply overhang.",
-   "<b>Levels that exist so far:</b> $135 IPO price (the floor of floors), $150 day-one open/stabilization zone, $176.5 day-one high. That's the entire technical map right now.",
-   "<b>Risks:</b> valuation prices in flawless Starlink growth + Mars optionality; Musk key-man concentration; a hawkish FOMC next week hits freshly-IPO'd mega-growth hardest of anything on your list.",
+   "<b>Lockup complexity:</b> early investors can unlock 20% after Q2 earnings (expected late July/early Aug); final employee lockup expires Dec 8, 2026. The first unlock is the near-term supply event to watch.",
+   "<b>Initiations catalyst:</b> analyst quiet period expires ~July 22. Morgan Stanley (deal manager) and KeyBanc have already noted the stock; broader initiations will likely include an Overweight from MS, which historically causes a volatility gap.",
+   "<b>Levels:</b> $135 IPO floor, $147 MSL (Jun 23 low), $150 day-1 open/stabilization, $176.5 day-1 high. RSI and moving averages still too thin (13 bars) for reliable signals.",
+   "<b>Risk:</b> valuation prices in flawless Starlink growth + Starship optionality; Musk key-man concentration; rate-hike expectations hit freshly-IPO'd mega-growth hardest.",
   ] },
 };
-const MACRO_NOTE = "Binary event for every name on this list: FOMC June 16–17 — first projections under new Fed Chair Kevin Warsh. Sticky inflation (core services ~3.5% YoY) has markets fearing hikes; the Iran-deal thaw is the offsetting tailwind.";
+const MACRO_NOTE = "Fed held at 3.50–3.75% for the 4th consecutive meeting (Jun 17). The shift: 9 of 18 FOMC members now see at least one rate hike in 2026, and core PCE was revised up to 3.3% (from 2.7%). Chair Warsh abandoned traditional forward guidance — every data print now moves markets. NVDA broke below its recent swing low on Jul 1 as the AI mega-cap rotation continues. Taiwan memory names are correcting from late-June highs but the fundamental cycle (DDR4 shortage, +58–63% QoQ contract prices) remains intact.";

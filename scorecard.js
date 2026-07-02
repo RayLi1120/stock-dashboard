@@ -1,6 +1,6 @@
 // Machine-managed prediction scorecard. Strict JSON body — written by grade_predictions.py.
 const SCORECARD = {
- "generated": "2026-06-17 15:56",
+ "generated": "2026-07-01 21:47",
  "entries": [
   {
    "sym": "2344",

@@ -1,11 +1,11 @@
 // Machine-managed Congress/Senate large-trade tracker. Strict JSON body — maintained by the scheduled scan.
 // Only trades sized $1,000,001+ (the STOCK Act bracket above $1M) are listed.
-// topTraders: verified aggregates (Quiver Quantitative, last 12 months, 2026-06-16).
+// topTraders: verified aggregates (Quiver Quantitative, last 12 months).
 // trades: sample rows until the scan fills live disclosures (sample:true marks unverified seed data).
 const SENATORS = {
- "generated": "2026-06-16",
+ "generated": "2026-07-01",
  "threshold": 1000000,
- "note": "U.S. lawmakers must disclose trades within 45 days (STOCK Act). Amounts are official ranges. This view filters to trades of $1M or more.",
+ "note": "U.S. lawmakers must disclose trades within 45 days (STOCK Act). Amounts are official ranges. This view filters to trades of $1M or more. Aggregate data: Quiver Quantitative 12-month trailing. NVDA dominated congressional purchase volume at $11.6M net accumulation.",
  "topTraders": [
   {"name": "Ro Khanna", "party": "D", "chamber": "House", "trades": 4847, "volume": 64443500},
   {"name": "Michael T. McCaul", "party": "R", "chamber": "House", "trades": 1124, "volume": 63728500},

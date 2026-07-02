@@ -2,7 +2,7 @@
  "perStock": {
   "2344": {
    "variant": "v1_base",
-   "mae": 4.71,
+   "mae": 4.66,
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
@@ -24,7 +24,7 @@
   },
   "6770": {
    "variant": "v1_base",
-   "mae": 3.99,
+   "mae": 4.06,
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
@@ -35,7 +35,7 @@
   },
   "1307": {
    "variant": "v1_base",
-   "mae": 1.57,
+   "mae": 1.5,
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
@@ -46,7 +46,7 @@
   },
   "NVDA": {
    "variant": "v4_long",
-   "mae": 1.89,
+   "mae": 1.83,
    "version": 1,
    "evolvedAt": "2026-06-20",
    "log": [
@@ -68,7 +68,7 @@
   },
   "AAPL": {
    "variant": "v1_base",
-   "mae": 1.03,
+   "mae": 1.13,
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
