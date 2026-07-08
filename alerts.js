@@ -1,7 +1,7 @@
 // Machine-managed alert log. Strict JSON body — written by check_alerts.py.
 const ALERTS = {
- "generated": "2026-07-02 07:55",
- "newCount": 2,
+ "generated": "2026-07-08 21:02",
+ "newCount": 4,
  "items": [
   {
    "at": "2026-06-12 18:25",
@@ -66,6 +66,38 @@ const ALERTS = {
    "rule": "structure-break",
    "level": "warn",
    "msg": "daily close 198.35 broke the last MSL 199.34 (2026-06-09) — structure stop hit, uptrend invalidated"
+  },
+  {
+   "at": "2026-07-08 21:02",
+   "d": "07-06",
+   "sym": "2344",
+   "rule": "gap",
+   "level": "warn",
+   "msg": "gapped +3.5% at the open"
+  },
+  {
+   "at": "2026-07-08 21:02",
+   "d": "07-06",
+   "sym": "2337",
+   "rule": "gap",
+   "level": "warn",
+   "msg": "gapped +2.8% at the open"
+  },
+  {
+   "at": "2026-07-08 21:02",
+   "d": "07-06",
+   "sym": "1307",
+   "rule": "gap",
+   "level": "warn",
+   "msg": "gapped -6.1% at the open"
+  },
+  {
+   "at": "2026-07-08 21:02",
+   "d": "07-06",
+   "sym": "1307",
+   "rule": "structure-break",
+   "level": "warn",
+   "msg": "daily close 33.15 broke the last MSL 33.85 (2026-06-30) — structure stop hit, uptrend invalidated"
   }
  ]
 };

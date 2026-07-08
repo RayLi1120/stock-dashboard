@@ -7,38 +7,38 @@
  },
  "levels": {
   "2344": {
-   "above": 200,
-   "below": 183,
-   "why": "200 = next major hurdle above the 190 support retest; 183 = support-zone invalidation (below prior breakout base)"
+   "above": 195,
+   "below": 178,
+   "why": "195 = reclaim of the failed 190 pivot; 178 = below the thin post-breakdown zone, opens air toward 152-160"
   },
   "2337": {
-   "below": 138,
-   "why": "138 = close below would threaten the MSL at 132.5 and confirm distribution"
+   "below": 137,
+   "why": "137 = close below would threaten the MSL at 132.5 and confirm distribution"
   },
   "6770": {
-   "below": 69,
-   "above": 82,
-   "why": "69 = pullback invalidation; 82 = reclaim of mid-range toward prior MSH 89.3"
+   "below": 68,
+   "above": 80,
+   "why": "68 = support-zone breakdown; 80 = reclaim of mid-range toward prior MSH 89.3"
   },
   "NVDA": {
-   "below": 193,
+   "below": 192,
    "above": 205,
-   "why": "193 = extends correction below MSL break; 205 = reclaim of recent breakdown zone"
+   "why": "192 = renewed break below the MSL/support shelf; 205 = reclaim of the recent breakdown zone"
   },
   "1307": {
-   "above": 36.0,
-   "below": 32.5,
-   "why": "36.0 = retest of recent breakdown level; 32.5 = below MSL and support zone — thesis invalidation"
+   "above": 35.0,
+   "below": 32.0,
+   "why": "35.0 = reclaim of the broken MSL (33.85); 32.0 = below the next volume-profile support, confirms trend-flip"
   },
   "AAPL": {
-   "below": 288,
-   "above": 302,
-   "why": "288 = below post-WWDC stabilization floor; 302 = reclaim of pre-keynote level"
+   "below": 302,
+   "above": 318,
+   "why": "302 = old MSH, now the breakout invalidation pivot; 318 = test of this week's high"
   },
   "SPCX": {
-   "below": 147,
-   "above": 176.6,
-   "why": "147 = MSL / day-one low zone; 176.6 = day-one high breakout"
+   "below": 145,
+   "above": 165,
+   "why": "145 = below the Jun 23 MSL, confirms breakdown; 165 = reclaim of the pre-selloff range"
   }
  }
 }
