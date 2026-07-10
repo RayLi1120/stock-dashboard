@@ -1,14 +1,14 @@
 // Machine-managed event calendar. Strict JSON body — maintained by the scheduled scan.
 // kind: macro | earnings | revenue | corp. "est" marks estimated dates.
 const EVENTS = [
- {"d": "2026-07-10", "t": "TWSE monthly revenue (June) — 2344 / 2337 / 6770 / 1307 + TSMC", "sym": null, "kind": "revenue", "est": true},
- {"d": "2026-07-14", "t": "US CPI (June print) — key data ahead of the Jul 28-29 FOMC decision", "sym": null, "kind": "macro", "est": true},
- {"d": "2026-07-16", "t": "TSMC Q2 2026 earnings call — guided $39.0-40.2B revenue; watch for a 2026 outlook raise on AI capacity constraints", "sym": null, "kind": "earnings", "est": true},
- {"d": "2026-07-28", "t": "Apple Q3 FY26 earnings — first print under incoming CEO Ternus", "sym": "AAPL", "kind": "earnings", "est": true},
- {"d": "2026-07-29", "t": "FOMC rate decision — June SEP showed 9 of 19 officials expect ≥1 hike in 2026; market pricing a hold with hawkish risk", "sym": null, "kind": "macro", "est": true},
- {"d": "2026-07-30", "t": "Winbond Q2 earnings — key test of CEO's 'price hikes ≥ Q1' guidance after the 225→183 retracement", "sym": "2344", "kind": "earnings", "est": true},
- {"d": "2026-08-01", "t": "SpaceX Q2 earnings + first insider lockup unlock window begins (~20% of locked shares)", "sym": "SPCX", "kind": "earnings", "est": true},
- {"d": "2026-08-26", "t": "NVIDIA Q2 FY27 earnings — Q2 guide was $91B; will Blackwell ramp validate?", "sym": "NVDA", "kind": "earnings", "est": true},
- {"d": "2026-09-01", "t": "Tim Cook → John Ternus CEO handover (confirmed September)", "sym": "AAPL", "kind": "corp", "est": false},
+ {"d": "2026-07-10", "t": "TWSE June monthly revenue — San Fang (1307), the last watchlist name still to report; Winbond (+189.88% YoY), Macronix (+216% YoY) and Powerchip (+68.8% YoY) already posted records/multi-year highs", "sym": "1307", "kind": "revenue", "est": true},
+ {"d": "2026-07-14", "t": "US CPI (June print) — key data ahead of the Jul 28-29 FOMC; oil re-spike (Hormuz) raises the stakes", "sym": null, "kind": "macro", "est": true},
+ {"d": "2026-07-16", "t": "TSMC Q2 2026 earnings (confirmed) — Street $40.0B revenue, EPS $3.81, guided GM 65.5-67.5%; the AI-demand referendum for the TW tape", "sym": null, "kind": "earnings", "est": false},
+ {"d": "2026-07-29", "t": "FOMC rate decision (Jul 28-29) — June SEP showed 9 of 19 officials expect ≥1 hike in 2026; market pricing a hold with hawkish risk, now plus an oil shock", "sym": null, "kind": "macro", "est": false},
+ {"d": "2026-07-30", "t": "Apple fiscal Q3 earnings (confirmed, moved from Jul 28 est.) — one of Cook's final calls before the Ternus handover", "sym": "AAPL", "kind": "earnings", "est": false},
+ {"d": "2026-07-30", "t": "Winbond Q2 earnings — key test of CEO's 'price hikes ≥ Q1' guidance after the 225→168 retracement", "sym": "2344", "kind": "earnings", "est": true},
+ {"d": "2026-08-06", "t": "SpaceX first public earnings + first lockup unlock (~20% of insiders may sell; +10% conditional on IPO-price terms) — the double event running the tape", "sym": "SPCX", "kind": "earnings", "est": false},
+ {"d": "2026-08-26", "t": "NVIDIA Q2 FY27 earnings — Q2 guide was $91B; hyperscaler capex guides earlier in July set the bar", "sym": "NVDA", "kind": "earnings", "est": true},
+ {"d": "2026-09-01", "t": "Tim Cook → John Ternus CEO handover (confirmed)", "sym": "AAPL", "kind": "corp", "est": false},
  {"d": "2026-12-08", "t": "SPCX final employee lockup expiry — bulk of Class A shares enter market", "sym": "SPCX", "kind": "corp", "est": true}
 ];

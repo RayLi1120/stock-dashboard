@@ -7,38 +7,38 @@
  },
  "levels": {
   "2344": {
-   "above": 195,
-   "below": 178,
-   "why": "195 = reclaim of the failed 190 pivot; 178 = below the thin post-breakdown zone, opens air toward 152-160"
+   "above": 184,
+   "below": 158,
+   "why": "184 = reclaim of the 07-07 gap-down open, negates the breakdown; 158 = losing the top of the 152-160 June breakout base"
   },
   "2337": {
-   "below": 137,
-   "why": "137 = close below would threaten the MSL at 132.5 and confirm distribution"
+   "below": 133,
+   "why": "133 = below the 07-08 intraday wick low (134.0), which already pierced the 135 MSL and got reclaimed — a close below 133 is the real distribution signal"
   },
   "6770": {
-   "below": 68,
-   "above": 80,
-   "why": "68 = support-zone breakdown; 80 = reclaim of mid-range toward prior MSH 89.3"
+   "below": 66,
+   "above": 75,
+   "why": "66 = breakdown of the 66.5-70.7 volume zone; 75 = reclaim of last week's shelf, bounce confirmed"
   },
   "NVDA": {
-   "below": 192,
-   "above": 205,
-   "why": "192 = renewed break below the MSL/support shelf; 205 = reclaim of the recent breakdown zone"
+   "below": 196,
+   "above": 209,
+   "why": "196 = back below the top of the 188-196 zone, reclaim failed; 209 = entering the 208.8-216.8 resistance band, breakout watch toward the 213.99 MSH"
   },
   "1307": {
-   "above": 35.0,
-   "below": 32.0,
-   "why": "35.0 = reclaim of the broken MSL (33.85); 32.0 = below the next volume-profile support, confirms trend-flip"
+   "above": 34.0,
+   "below": 31.5,
+   "why": "34.0 = reclaim of the broken MSL (33.85); 31.5 = decisively inside the 30.9-32.3 zone, trend flip confirmed"
   },
   "AAPL": {
    "below": 302,
    "above": 318,
-   "why": "302 = old MSH, now the breakout invalidation pivot; 318 = test of this week's high"
+   "why": "302 = old MSH, now the breakout invalidation pivot; 318 = extension above this week's high"
   },
   "SPCX": {
    "below": 145,
-   "above": 165,
-   "why": "145 = below the Jun 23 MSL, confirms breakdown; 165 = reclaim of the pre-selloff range"
+   "above": 160,
+   "why": "145 = Jul 8's higher-low (intraday ATL), losing it reopens the breakdown; 160 = reclaiming the pre-inclusion range high, next test toward the 172.4 MSH; $135 IPO price remains the hard floor below 145"
   }
  }
 }
