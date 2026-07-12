@@ -1,8 +1,8 @@
 // Machine-managed event calendar. Strict JSON body — maintained by the scheduled scan.
 // kind: macro | earnings | revenue | corp. "est" marks estimated dates.
 const EVENTS = [
- {"d": "2026-07-10", "t": "TWSE June monthly revenue — San Fang (1307), the last watchlist name still to report; Winbond (+189.88% YoY), Macronix (+216% YoY) and Powerchip (+68.8% YoY) already posted records/multi-year highs", "sym": "1307", "kind": "revenue", "est": true},
- {"d": "2026-07-14", "t": "US CPI (June print) — key data ahead of the Jul 28-29 FOMC; oil re-spike (Hormuz) raises the stakes", "sym": null, "kind": "macro", "est": true},
+ {"d": "2026-07-13", "t": "TWSE June monthly revenue — San Fang (1307), the last watchlist name still to report; still unconfirmed as of this scan (market shut Jul 10 for Typhoon Bavi may be delaying it). Winbond (+189.88% YoY), Macronix (+216% YoY) and Powerchip (+68.8% YoY) already posted records/multi-year highs", "sym": "1307", "kind": "revenue", "est": true},
+ {"d": "2026-07-14", "t": "US CPI (June print) — key data ahead of the Jul 28-29 FOMC; reignited Hormuz standoff (US-Iran exchanges resumed Jul 9-10) raises the stakes", "sym": null, "kind": "macro", "est": true},
  {"d": "2026-07-16", "t": "TSMC Q2 2026 earnings (confirmed) — Street $40.0B revenue, EPS $3.81, guided GM 65.5-67.5%; the AI-demand referendum for the TW tape", "sym": null, "kind": "earnings", "est": false},
  {"d": "2026-07-29", "t": "FOMC rate decision (Jul 28-29) — June SEP showed 9 of 19 officials expect ≥1 hike in 2026; market pricing a hold with hawkish risk, now plus an oil shock", "sym": null, "kind": "macro", "est": false},
  {"d": "2026-07-30", "t": "Apple fiscal Q3 earnings (confirmed, moved from Jul 28 est.) — one of Cook's final calls before the Ternus handover", "sym": "AAPL", "kind": "earnings", "est": false},

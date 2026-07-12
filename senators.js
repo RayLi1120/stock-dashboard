@@ -3,7 +3,7 @@
 // topTraders: verified aggregates (Quiver Quantitative, last 12 months).
 // trades: verified individual disclosures (House Clerk PTRs / Quiver / press coverage of filings).
 const SENATORS = {
- "generated": "2026-07-09",
+ "generated": "2026-07-10",
  "threshold": 1000000,
  "note": "U.S. lawmakers must disclose trades within 45 days (STOCK Act). Amounts are official ranges. This view filters to trades of $1M or more. Aggregate data: Quiver Quantitative 12-month trailing. Public-record transparency data, not a recommendation.",
  "topTraders": [

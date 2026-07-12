@@ -8,12 +8,12 @@
  "levels": {
   "2344": {
    "above": 184,
-   "below": 158,
-   "why": "184 = reclaim of the 07-07 gap-down open, negates the breakdown; 158 = losing the top of the 152-160 June breakout base"
+   "below": 165,
+   "why": "184 = 07-08 high / reclaim of the 07-07 gap-down open; 165 = 07-08 low, losing it negates the 07-09 reversal"
   },
   "2337": {
-   "below": 133,
-   "why": "133 = below the 07-08 intraday wick low (134.0), which already pierced the 135 MSL and got reclaimed — a close below 133 is the real distribution signal"
+   "below": 135,
+   "why": "135 = the old MSL, now reclaimed with room after 07-09's follow-through close at 143.5 — a close back below it undoes the whole recovery, tighter than the prior 133 wick-based level"
   },
   "6770": {
    "below": 66,
@@ -21,9 +21,9 @@
    "why": "66 = breakdown of the 66.5-70.7 volume zone; 75 = reclaim of last week's shelf, bounce confirmed"
   },
   "NVDA": {
-   "below": 196,
-   "above": 209,
-   "why": "196 = back below the top of the 188-196 zone, reclaim failed; 209 = entering the 208.8-216.8 resistance band, breakout watch toward the 213.99 MSH"
+   "below": 204,
+   "above": 214,
+   "why": "204 = 07-10 breakout day's shelf, losing it undoes the move; 214 = clears the 213.99 MSH, opens the 216.8 zone top"
   },
   "1307": {
    "above": 34.0,
@@ -36,9 +36,9 @@
    "why": "302 = old MSH, now the breakout invalidation pivot; 318 = extension above this week's high"
   },
   "SPCX": {
-   "below": 145,
-   "above": 160,
-   "why": "145 = Jul 8's higher-low (intraday ATL), losing it reopens the breakdown; 160 = reclaiming the pre-inclusion range high, next test toward the 172.4 MSH; $135 IPO price remains the hard floor below 145"
+   "below": 143,
+   "above": 150,
+   "why": "143 = below the 145.20-145.34 zone being retested right now, opens fresh air toward the $135 IPO floor; 150 = the day-one open, reclaiming it restores the post-bounce bull case"
   }
  }
 }

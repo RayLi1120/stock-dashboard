@@ -13,7 +13,7 @@
   },
   "2337": {
    "variant": "v1_base",
-   "mae": 4.84,
+   "mae": 4.86,
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
@@ -24,7 +24,7 @@
   },
   "6770": {
    "variant": "v1_base",
-   "mae": 4.02,
+   "mae": 4.01,
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
@@ -46,7 +46,7 @@
   },
   "NVDA": {
    "variant": "v4_long",
-   "mae": 1.8,
+   "mae": 1.81,
    "version": 1,
    "evolvedAt": "2026-06-20",
    "log": [
@@ -68,7 +68,7 @@
   },
   "AAPL": {
    "variant": "v1_base",
-   "mae": 1.15,
+   "mae": 1.14,
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
@@ -89,5 +89,5 @@
    "trigger": "weekend"
   }
  ],
- "lastEvolve": "2026-07-09"
+ "lastEvolve": "2026-07-10"
 }

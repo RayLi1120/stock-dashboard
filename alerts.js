@@ -1,7 +1,7 @@
 // Machine-managed alert log. Strict JSON body — written by check_alerts.py.
 const ALERTS = {
- "generated": "2026-07-10 20:37",
- "newCount": 1,
+ "generated": "2026-07-11 22:32",
+ "newCount": 4,
  "items": [
   {
    "at": "2026-06-12 18:25",
@@ -130,6 +130,38 @@ const ALERTS = {
    "rule": "gap",
    "level": "warn",
    "msg": "gapped +2.0% at the open"
+  },
+  {
+   "at": "2026-07-11 22:32",
+   "d": "07-09",
+   "sym": "2344",
+   "rule": "gap",
+   "level": "warn",
+   "msg": "gapped +3.0% at the open"
+  },
+  {
+   "at": "2026-07-11 22:32",
+   "d": "07-09",
+   "sym": "2337",
+   "rule": "gap",
+   "level": "warn",
+   "msg": "gapped +2.2% at the open"
+  },
+  {
+   "at": "2026-07-11 22:32",
+   "d": "07-10",
+   "sym": "NVDA",
+   "rule": "ma-cross-up",
+   "level": "info",
+   "msg": "MA5 crossed above MA20 — bullish trend signal"
+  },
+  {
+   "at": "2026-07-11 22:32",
+   "d": "07-10",
+   "sym": "SPCX",
+   "rule": "structure-break",
+   "level": "warn",
+   "msg": "daily close 145.34 broke the last MSL 147.11 (2026-06-23) — structure stop hit, uptrend invalidated"
   }
  ]
 };
