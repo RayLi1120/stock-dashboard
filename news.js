@@ -4,319 +4,284 @@
 const NEWS = {
  "_tape": [
   {
-   "d": "2026-07-10",
-   "t": "Taiwan Stock Exchange closed all day for Typhoon Bavi — settlement and delivery postponed",
-   "src": "Taiwan News",
-   "read": "No new session for any of the four TW names since Jul 9's close; treat Jul 9 as the live print until trading resumes.",
-   "url": "https://www.taiwannews.com.tw/news/6398723"
-  },
-  {
-   "d": "2026-07-09",
-   "t": "TAIEX closes -0.83% (-379.8) at 45,354.61, a 5th straight down session (-3.05% for the week) — TSMC -2.03%, MediaTek -1.75% — even as GlobalWafers and Nanya Tech hit daily limit-up on AI/HPC wafer demand",
-   "src": "Taiwan News",
-   "read": "Broad index still weak, but the divergence is widening: silicon-wafer and memory names (GlobalWafers, Nanya, and now Winbond/Macronix) are reversing hard against the index trend.",
-   "url": "https://www.taiwannews.com.tw/news/6398723"
-  },
-  {
-   "d": "2026-07-10",
-   "t": "Hormuz shipping traffic grinds to a near-halt again as US-Iran exchanges resume for a second day, reversing early-July signs of a reopening",
-   "src": "Bloomberg / Al Jazeera",
-   "read": "A fresh macro wildcard re-entering the tape right as TAIEX and Brent were stabilizing — watch for spillover into risk sentiment ahead of the Jul 28-29 FOMC.",
-   "url": "https://www.aljazeera.com/economy/2026/7/10/strait-of-hormuz-shipping-grinds-to-halt-as-us-iran-resume-fighting"
-  },
-  {
-   "d": "2026-07-10",
-   "t": "NVDA +3.93% to $210.76 on a stack of catalysts: SK hynix's US listing lands well, China reportedly nears conditional H200 approval for Alibaba/ByteDance/DeepSeek, and NVDA invests ~$500M in Australian cloud-infra startup Firmus Technologies",
-   "src": "Investing.com / TradingKey",
-   "read": "Clean breakout day closing at the session high, clearing most of the 208.8-216.8 resistance band toward the 213.99 MSH.",
-   "url": "https://www.investing.com/news/stock-market-news/why-is-nvidia-stock-rallying-today-93CH-4786595"
-  },
-  {
-   "d": "2026-07-08",
-   "t": "Winbond and Powerchip post record/multi-year-high June revenue (+189.9% and +68.8% YoY respectively); Macronix +216% YoY — all three then reversed hard on Jul 9",
-   "src": "TechNews / UDN",
-   "read": "The fundamental/tape divergence flagged last cycle just started resolving in the stocks' favor.",
-   "url": "https://finance.technews.tw/2026/07/07/winbond-electronics-revenue-also-grew-by-139-2-year-on-year-in-the-first-half-of-the-year"
+   "d": "2026-07-17",
+   "t": "TAIEX crashes 2,953.71 points (-6.47%) to 42,671.27 — the largest point drop on record — on a record NT$189B single-day foreign outflow; TSMC -7.29% to NT$2,290, UMC limit-down",
+   "src": "BigGo / Bloomberg",
+   "read": "The trigger was one line from C.C. Wei's earnings call: 'only AI-related mature process nodes should be experiencing tight supply' — it detonated the entire mature-node/memory trade in a single session.",
+   "url": "https://www.bloomberg.com/news/articles/2026-07-17/chip-stock-selloff-deepens-in-asia-as-tsmc-fails-to-impress"
   },
   {
    "d": "2026-07-16",
-   "t": "TSMC Q2 earnings Jul 16 (confirmed): Street at $40.0B revenue, EPS $3.81, GM 65.5-67.5%; Citi raised its TW-listed PT to NT$3,800 from NT$2,875 ahead of the print, expecting a raised FY26 revenue outlook",
-   "src": "TipRanks / TradingKey",
-   "read": "The AI-demand referendum for the entire Taiwan tape — a beat-and-raise (which Citi is now pricing in) is the most likely circuit-breaker for the current rotation.",
-   "url": "https://www.tipranks.com/news/tsmc-will-report-q2-earnings-on-july-16-should-investors-buy-the-stock-before-results"
+   "t": "TSMC Q2 beats across the board: revenue $40.2B (guide $39.0-40.2B), gross margin 67.7% (guide 65.5-67.5%), HPC +20% QoQ; full-year capex guidance raised — AI demand 'extremely robust' on the shift to agentic AI",
+   "src": "Investing.com / TechTimes",
+   "read": "The numbers were everything bulls wanted; the market crashed anyway on the mature-node commentary — a pure narrative reversal, not a results miss.",
+   "url": "https://www.investing.com/news/company-news/tsmc-q2-2026-slides-ai-demand-drives-record-margins-hpc-surges-20-93CH-4794789"
+  },
+  {
+   "d": "2026-07-15",
+   "t": "TAIEX +893.64 to 45,631.59; memory melt-up — Powerchip (76.1), Winbond (180.5) and ESMT (239) all lock limit-up on cool US CPI, SOX +2.54%, SK hynix +11%, and Powerchip's blowout earnings call",
+   "src": "BigGo Finance",
+   "read": "The euphoria high-water mark of the cycle, two sessions before the crash — Thursday's 444M-share volume in Powerchip now reads as the blow-off.",
+   "url": "https://finance.biggo.com/news/43ee1387-c488-4272-b60e-a97393574ca9"
+  },
+  {
+   "d": "2026-07-14",
+   "t": "June CPI cools sharply: headline 3.5% vs 3.8% expected, core 2.6% vs 2.9%; energy -0.4% MoM. September hike odds trimmed to ~63% from 75%+; Fed Chair Warsh: not 'mission accomplished'",
+   "src": "CNBC / IG",
+   "read": "The soft print fueled the Jul 15 melt-up, but the Fed regime is still hawkish-hold with hike risk — Jul 28-29 FOMC is the next test, with June PCE (~Jul 24) in between.",
+   "url": "https://www.cnbc.com/2026/07/14/consumer-price-index-inflation-report-june-2026.html"
+  },
+  {
+   "d": "2026-07-14",
+   "t": "US launches new airstrikes on Iran and reimposes the Hormuz blockade; Trump floats then abandons a 20% fee on strait cargo; Brent hits ~$86, a 1-month high, as transits drop >50%",
+   "src": "CNBC / Al Jazeera",
+   "read": "The June truce is fully dead. An oil shock layered on top of a hawkish Fed and a broken TW tech tape is the worst macro mix of the year so far.",
+   "url": "https://www.cnbc.com/2026/07/14/oil-prices-today-brent-wti-hormuz-trump-toll-iran.html"
+  },
+  {
+   "d": "2026-07-17",
+   "t": "US quad-witching session compounds the semi rout — SOX heavy, NVDA -2.2%; AAPL the only green megacap, closing at a record",
+   "src": "Yahoo Finance",
+   "read": "US didn't panic with Taiwan — the damage stayed contained to semis/AI-capex names while the 'AI-lite' haven trade (AAPL) absorbed the rotation.",
+   "url": "https://finance.yahoo.com/markets/stocks/"
   }
  ],
  "2344": [
   {
-   "d": "2026-07-09",
-   "t": "Stock closes 176.5 (+4.75%, high 184, low 170) — sharp one-day reversal off 07-08's low, closing back near the 07-07 gap-down open even as TAIEX fell another 0.83%",
-   "src": "scan note",
-   "read": "Stock-specific strength against a weak index — the first real technical tell that the correction may be exhausting itself. No confirming session yet (TW market shut 07-10 for Typhoon Bavi)."
+   "d": "2026-07-17",
+   "t": "Winbond -9.87% to 155.0, closing at the session low in the record TAIEX crash — gives back the entire limit-up week and then some",
+   "src": "BigGo / TWSE",
+   "read": "Closing at the dead low with record foreign outflow behind it points to Monday follow-through; 165 (the old July low) is now overhead resistance.",
+   "url": "https://finance.biggo.com/news/a59848ba-f6e6-443e-8fbc-4542a3f83093"
   },
   {
-   "d": "2026-07-08",
-   "t": "DIGITIMES: enterprise SSD shortage lifts DDR4 8Gb Q3 contract prices up to 50% higher QoQ; broader Q3 DRAM contracts guided +20-30%",
-   "src": "DIGITIMES",
-   "read": "Pricing backdrop keeps improving even faster than the 07-07 revenue print implied — Q3 could beat June's already-record run rate."
-  },
-  {
-   "d": "2026-07-07",
-   "t": "June consolidated revenue NT$20.597B, +189.88% YoY — 7th straight monthly record; H1 2026 revenue NT$98.096B, +139.2% YoY",
-   "src": "TechNews / ETtoday",
-   "read": "The cleanest fundamental confirmation yet, landing the same week the stock corrected 23% off its MSH — pure positioning unwind, not a demand problem.",
-   "url": "https://finance.technews.tw/2026/07/07/winbond-electronics-revenue-also-grew-by-139-2-year-on-year-in-the-first-half-of-the-year"
-  },
-  {
-   "d": "2026-06-30",
-   "t": "Reports of a TSMC-Winbond alliance to strengthen Taiwan's AI memory supply-chain autonomy",
-   "src": "TechNews",
-   "read": "A strategic-tie-up angle beyond pure DRAM/NOR pricing — worth tracking for confirmation, not yet a financial catalyst.",
-   "url": "https://technews.tw/2026/06/30/tsmc-winbond-alliance-ai-supply-chain-autonomy-strengthened/"
-  },
-  {
-   "d": "2026-06-16",
-   "t": "TrendForce: NOR flash contract prices +100% in 1H26; structural shortage to keep NOR and SLC NAND rising through 2H26; Winbond remains #1 NOR supplier",
-   "src": "TrendForce",
-   "read": "The NOR side of the thesis is as strong as the DRAM side — no supplier has announced meaningful capacity expansion.",
-   "url": "https://www.trendforce.com/presscenter/news/20260616-13102.html"
-  },
-  {
-   "d": "2026-06-02",
-   "t": "Morgan Stanley raises Winbond target NT$100 → NT$222; stock limit-up at NT$184.5",
+   "d": "2026-07-16",
+   "t": "Winbond -4.7% to 172 in pre-TSMC-call profit-taking; TAIEX briefly loses 45,000 before recovering",
    "src": "BigGo Finance",
-   "read": "Street-high conviction on legacy DRAM/NOR; stock briefly exceeded the target (225 on 06-26) and has since given back the entire MS-note rally.",
-   "url": "https://finance.biggo.com/news/FiAmhp4BoicNoOgC7kCY"
+   "read": "The distribution started a day before the headline crash — someone was selling the earnings-call rumor.",
+   "url": "https://finance.biggo.com/news/a59848ba-f6e6-443e-8fbc-4542a3f83093"
+  },
+  {
+   "d": "2026-07-15",
+   "t": "Winbond locks limit-up at 180.5 in the sector melt-up (cool CPI + SK hynix +11% + Powerchip's earnings call)",
+   "src": "BigGo Finance",
+   "read": "The reclaim of the 07-08 breakdown lasted exactly two sessions — a textbook bull trap in hindsight.",
+   "url": "https://finance.biggo.com/news/43ee1387-c488-4272-b60e-a97393574ca9"
+  },
+  {
+   "d": "2026-07-14",
+   "t": "Q3 DDR4 8Gb contract quotes still reported up to +50% QoQ (enterprise-SSD-driven shortage); Q3 DRAM contracts broadly guided +20-30%",
+   "src": "TrendForce / DIGITIMES",
+   "read": "The pricing fundamentals and the tape have fully decoupled — Jul 30 Q2 earnings (CEO guided price hikes 'not smaller than Q1') is the referendum.",
+   "url": "https://www.trendforce.com/presscenter/news/"
+  },
+  {
+   "d": "2026-07-13",
+   "t": "Post-typhoon reopen: Winbond fades -5.4% to 167 (high 183) as the Jul 9 reversal fails to draw follow-through",
+   "src": "TWSE",
+   "read": "The first tell of the week: a 183 high sold straight down — the reversal never had real sponsorship.",
+   "url": "https://tw.stock.yahoo.com/quote/2344.TW"
   }
  ],
  "2337": [
   {
-   "d": "2026-07-09",
-   "t": "Stock closes 143.5 (+3.61%, high 148, low 139.5) — clean follow-through on the 07-08 wick-and-reclaim, closing well clear of both the 134 wick low and the 135 MSL",
-   "src": "scan note",
-   "read": "Best relative strength of the trio again, even as TAIEX fell 0.83% the same session. Invalidation now moves up to a close below 135 itself."
+   "d": "2026-07-17",
+   "t": "Macronix -8.42% to 125.0 — closes decisively below the 135 MSL it had reclaimed the prior week; worst weekly close since May",
+   "src": "BigGo / TWSE",
+   "read": "The cleanest technical breakdown of the trio: the stop-run-and-reclaim thesis is dead, and 132.5-136.5 flips back to resistance.",
+   "url": "https://finance.biggo.com/news/a59848ba-f6e6-443e-8fbc-4542a3f83093"
   },
   {
-   "d": "2026-07-08",
-   "t": "Stock closes 138.5 (-0.36%) after wicking to 134.0 intraday — below the 135.0 MSL — before buyers reclaimed it; second straight session of relative strength vs Winbond",
-   "src": "scan note",
-   "read": "A stop-run-and-recover proved more bullish than a clean hold would have been — confirmed by 07-09's follow-through."
-  },
-  {
-   "d": "2026-07-07",
-   "t": "Macronix June consolidated net sales NT$6.956B, +11.2% MoM, +216.1% YoY; H1 2026 revenue +128.8% YoY",
-   "src": "MarketScreener",
-   "read": "Best confirmation yet that the NOR/legacy-DRAM cycle is real at the revenue line — the fundamental de-risk is done; the fight is now purely technical.",
-   "url": "https://www.marketscreener.com/news/macronix-international-announces-consolidated-net-sales-of-nt-6-956-billion-for-june-2026-ce7f5edbde89f022"
-  },
-  {
-   "d": "2026-06-02",
-   "t": "Morgan Stanley rates Macronix Overweight in memory sector call",
+   "d": "2026-07-16",
+   "t": "Macronix tumbles -8.1% to 136.5, the worst of the trio, in pre-earnings-call positioning",
    "src": "BigGo Finance",
-   "read": "Same supercycle umbrella as Winbond; NOR pricing is the driver. Stock hit NT$192 on 06-23 then gave back 28% before this week's reversal.",
-   "url": "https://finance.biggo.com/news/FiAmhp4BoicNoOgC7kCY"
+   "read": "Lower liquidity cuts both ways — the laggard-catch-up trade unwound twice as fast as it built.",
+   "url": "https://finance.biggo.com/news/a59848ba-f6e6-443e-8fbc-4542a3f83093"
   },
   {
-   "d": "2026 (earlier)",
-   "t": "Institutional selling of 43M shares on a prior record-high day (-4%)",
+   "d": "2026-07-15",
+   "t": "Macronix +8.8% to 148.5 (high 150.5) in the sector melt-up — highest close since late June",
    "src": "BigGo Finance",
-   "read": "Reminder that rotation in this name is violent — the current drawdown from 192 fits the pattern, though this week's reversal argues the unwind may be done."
+   "read": "The 150 tag was the week's high-water mark; the round-trip to 125 took two sessions.",
+   "url": "https://finance.biggo.com/news/43ee1387-c488-4272-b60e-a97393574ca9"
+  },
+  {
+   "d": "2026-07-14",
+   "t": "Macronix wicks to 130.5 intraday before closing 139.5 — the third MSL stop-run in two weeks, this time ahead of the CPI print",
+   "src": "TWSE",
+   "read": "Repeated stop-runs at the same level exhaust the buyers who defend it — Friday's break finally proved it.",
+   "url": "https://tw.stock.yahoo.com/quote/2337.TW"
   }
  ],
  "6770": [
   {
-   "d": "2026-07-09",
-   "t": "Stock closes 71.1 (-0.14%, high 74.3, low 70.9) — a quiet consolidation day holding just above the 66.5-70.7 zone after 07-08's reversal, no follow-through extension",
-   "src": "scan note",
-   "read": "Calibration flags my last 5 calls on this name ran +1.06% too bullish on average — dialing back conviction here even though fundamentals remain the strongest of the trio."
+   "d": "2026-07-17",
+   "t": "Powerchip -9.93% to 68.9 — foreign investors dump 115,284 lots, the most-sold name on the entire TWSE",
+   "src": "BigGo / TWSE",
+   "read": "Wei's mature-node comment lands hardest on the one watchlist name that IS the mature-node foundry story — the tape sided with Wei over Frank Huang.",
+   "url": "https://finance.biggo.com/news/a59848ba-f6e6-443e-8fbc-4542a3f83093"
   },
   {
-   "d": "2026-07-09",
-   "t": "June consolidated revenue NT$6.474B, +68.8% YoY — 47-month high; Q2 revenue NT$17.29B (+27.4% QoQ, +53.3% YoY); H1 NT$30.863B (+37.8% YoY); management says price-hike benefits only start reflecting from June",
-   "src": "UDN / CNYES",
-   "read": "Confirms the 07-08 bounce with hard numbers — and management's own comment implies H2 should accelerate further from here, the strongest fundamental read of the trio.",
-   "url": "https://udn.com/news/story/7253/9617739"
-  },
-  {
-   "d": "2026-07-08",
-   "t": "Only member of the trio to bounce on 07-08: intraday dipped to 67.1 (inside the 66.5-70.7 zone) then reclaimed 71.2 (+1.57%) — buyers defended the volume zone",
-   "src": "scan note",
-   "read": "The company-specific story (first profit in 10 quarters, Micron alliance, now record June revenue) is cushioning it through the sector unwind — relative strength confirmed."
-  },
-  {
-   "d": "2026-07-01",
-   "t": "PSMC posts first profitable quarter (Q1 2026) after a 10-quarter loss streak; Tongluo/Micron alliance credited as the turnaround driver",
+   "d": "2026-07-15",
+   "t": "Q2 earnings call ignites the sector: NPAT NT$3.29B, gross margin 28% (3.5-year high); Chairman Frank Huang projects Taiwan mature-node foundry GMs 'could all break 40%'; dividends to resume next year",
    "src": "BigGo Finance",
-   "read": "The Micron deal is now showing up in the P&L, not just the balance sheet. Second fab (~270k sq ft cleanroom) construction slated to start by end-FY2026.",
-   "url": "https://finance.biggo.com/news/V8BCe50BDPbb-ItT2GSn"
+   "read": "The fundamental beat is real and big — but Huang's 40% GM projection is now in direct public conflict with C.C. Wei's supply-demand read two days later.",
+   "url": "https://finance.biggo.com/news/43ee1387-c488-4272-b60e-a97393574ca9"
   },
   {
-   "d": "2026-03-16",
-   "t": "Micron completes acquisition of PSMC Tongluo P5 fab — cleanroom retrofit begins",
-   "src": "Digitimes",
-   "read": "Deal closed: US$1.8B cash in hand for Powerchip. DRAM output at P5 expected H2 2027. Removes deal-break risk.",
-   "url": "https://www.digitimes.com/news/a20260316VL200/micron-acquisition-taiwan-psmc-cleanroom.html"
-  },
-  {
-   "d": "2026-06-02",
-   "t": "Morgan Stanley rates Powerchip Overweight",
+   "d": "2026-07-15",
+   "t": "Domestic brokers raise Powerchip targets to NT$80 (from NT$65) post-call; 2026 EPS estimates ~NT$6.26, 2027 ~NT$6.39",
    "src": "BigGo Finance",
-   "read": "Sector call; PSMC is the highest-beta expression of the DDR4 shortage.",
-   "url": "https://finance.biggo.com/news/FiAmhp4BoicNoOgC7kCY"
+   "read": "At 68.9 the stock trades ~11x the new 2026 estimate — the bull case survives the crash if the estimates do.",
+   "url": "https://finance.biggo.com/news/43ee1387-c488-4272-b60e-a97393574ca9"
+  },
+  {
+   "d": "2026-07-16",
+   "t": "Blow-off session: 79.5 intraday high on 444M shares — the heaviest volume day of the cycle — before fading to 76.5",
+   "src": "TWSE",
+   "read": "Record volume at the high that fails to hold is distribution; Friday confirmed it.",
+   "url": "https://tw.stock.yahoo.com/quote/6770.TW"
+  },
+  {
+   "d": "2026-07-14",
+   "t": "Flush to 63.4 intraday (a new July low, now the MSL) before reversing to close 69.2 ahead of the earnings call",
+   "src": "TWSE",
+   "read": "63.4 is the line the whole July structure now hangs on — below it there's no support until the 56.6-59.1 zone.",
+   "url": "https://tw.stock.yahoo.com/quote/6770.TW"
   }
  ],
  "NVDA": [
   {
-   "d": "2026-07-10",
-   "t": "NVDA +3.93% to $210.76 (high 210.88, low 201.92) on three stacked catalysts: SK hynix's US ADR listing lands well, China reportedly nears conditional approval for Alibaba/ByteDance/DeepSeek to buy limited H200 volumes, and NVDA invests ~$500M in Australian cloud-infra startup Firmus Technologies (largest investor in its $2B raise)",
-   "src": "Investing.com / TradingKey",
-   "read": "Clean breakout closing at the session high, clearing most of the 208.8-216.8 resistance band toward the 213.99 MSH — the model itself reads almost flat, a real divergence from my technical/catalyst read.",
-   "url": "https://www.investing.com/news/stock-market-news/why-is-nvidia-stock-rallying-today-93CH-4786595"
+   "d": "2026-07-17",
+   "t": "NVDA -2.21% to 202.81 on quad-witching Friday as the TSMC-call semi rout goes global; low of 197.97 tags the 197.6 zone top and bounces",
+   "src": "Yahoo Finance",
+   "read": "Sympathy de-grossing, not a story change — Wei's mature-node caution explicitly exempted AI, and the low landed on structure to the tick.",
+   "url": "https://finance.yahoo.com/quote/NVDA/"
   },
   {
-   "d": "2026-07-09",
-   "t": "Gaps up to $204.46 on reports China may allow Alibaba/ByteDance/DeepSeek to buy limited H200 volumes, fades to $198.97, closes $203.80 (-0.16%) — a round-trip session",
-   "src": "Benzinga / The Information",
-   "read": "The market wasn't fully buying the China headline yet on 07-09 — it took 07-10's confirmation stack to break out.",
-   "url": "https://www.benzinga.com/markets/tech/26/07/60350622/whats-going-on-with-nvidia-stock-thursday-6"
+   "d": "2026-07-16",
+   "t": "TSMC beats and raises capex — HPC +20% QoQ, AI demand 'extremely robust' on agentic-AI compute growth",
+   "src": "Investing.com",
+   "read": "Direct supply-chain confirmation for Blackwell/Rubin demand from NVDA's sole foundry, two sessions after the H200 China news.",
+   "url": "https://www.investing.com/news/company-news/tsmc-q2-2026-slides-ai-demand-drives-record-margins-hpc-surges-20-93CH-4794789"
   },
   {
-   "d": "2026-07-08",
-   "t": "NVDA +3.7% to $204.21, reclaiming $200 — dip-buyers rotate back ahead of July hyperscaler earnings; Microsoft FY27 capex guide the key bull catalyst",
-   "src": "FXLeaders / Motley Fool",
-   "read": "Escaped the 188-196 chop zone. The Samsung memory rout helps the relative case — NVDA is the underowned 'value' AI trade at 21.7x forward.",
-   "url": "https://www.fxleaders.com/news/2026/07/08/nvidia-stock-rises-as-strong-ai-demand-offsets-valuation-and-supply-concerns/"
+   "d": "2026-07-14",
+   "t": "China reportedly clears Alibaba and ByteDance to place H200 orders; NVDA +4.07% to 211.8 on the news + cool CPI",
+   "src": "Yahoo Finance / TheStreet",
+   "read": "Guidance embeds zero China data-center revenue, so any approved H200 volume is pure upside optionality into the Aug 26 print — even if the first shipments are small.",
+   "url": "https://finance.yahoo.com/news/nvidia-stock-rises-china-reportedly-123153309.html"
   },
   {
-   "d": "2026-07-06",
-   "t": "NVDA is the 'black sheep' of the 2026 chip rally: +5% YTD vs AMD +171%, Micron +305%; Goldman calls 21.7x forward PE 'compelling'",
-   "src": "24/7 Wall St / TradingKey",
-   "read": "The market paid up for repricing stories and left perfection-priced NVDA behind — the 07-10 breakout is the mean-reversion setup starting to play out.",
-   "url": "https://247wallst.com/investing/2026/07/06/how-nvidia-became-the-black-sheep-of-the-chip-stock-rally/"
+   "d": "2026-07-13",
+   "t": "NVDA -3.43% to 203.53, giving back the Jul 10 breakout day as the prior week's three-catalyst pop consolidates",
+   "src": "Yahoo Finance",
+   "read": "The 213.99 MSH rejected the first attempt; the stock spent the whole week pinned between the 197.6 zone top and the MSH.",
+   "url": "https://finance.yahoo.com/quote/NVDA/"
   },
   {
-   "d": "2026-06-30",
-   "t": "Q1 FY27: revenue $82B +85% YoY (data center $75.2B +92%), $91B Q2 guidance",
-   "src": "Motley Fool",
-   "read": "Fundamentals never wavered through the correction — the stock's problem was positioning and rates, not earnings.",
-   "url": "https://www.fool.com/investing/2026/06/30/3-reasons-to-buy-nvidia-stock-in-july/"
-  },
-  {
-   "d": "2026-06-11",
-   "t": "Dividend raised ×25 to $0.25/qtr; pledges to return ≥50% of FCF; $80B added to buyback authorization",
-   "src": "Motley Fool",
-   "read": "A structural floor under dips — mega-cap capital-return era begins.",
-   "url": "https://www.fool.com/investing/2026/06/11/nvidia-just-announced-a-potential-windfall-for-sha/"
+   "d": "2026-08-26",
+   "t": "Q2 FY27 earnings est. Aug 26 — guide was $91B ±2%; Street watching whether China H200 shipments add to the number",
+   "src": "The Motley Fool",
+   "read": "The setup: guidance excludes China entirely, so the approval channel reopening is a free call option on the print.",
+   "url": "https://www.thestreet.com/investing/nvidia-china-h200-license-could-unlock-earnings-upside"
   }
  ],
  "1307": [
   {
-   "d": "2026-07-09",
-   "t": "Closes 32.15 (+0.47%, high 32.3, low 31.65) — a quiet green day still inside the 30.9-32.35 zone; June-revenue print still unconfirmed in any source checked",
-   "src": "scan note",
-   "read": "Range-bound rather than trending. TW market shut 07-10 for Typhoon Bavi, which may also be delaying attention to any revenue filing."
+   "d": "2026-07-10",
+   "t": "June revenue finally lands: NT$852.9M, -2.68% MoM but +11.11% YoY — second straight month of accelerating YoY growth; H1 ~NT$5.66B",
+   "src": "Yahoo TW / TWSE MOPS",
+   "read": "The long-pending catalyst resolved mildly positive and the stock didn't move — the range (30.65-33.0) remains the whole story.",
+   "url": "https://tw.stock.yahoo.com/quote/1307/revenue"
   },
   {
-   "d": "2026-07-08",
-   "t": "Closes 32.0 (-3.03%, low 31.8) — inside the 30.9-32.35 support zone but through its former top, still no company news; low held above the 31.5 stop",
-   "src": "scan note",
-   "read": "Technical damage but not yet a confirmed trend flip."
+   "d": "2026-07-17",
+   "t": "San Fang dips just -1.99% to 32.05 on the worst TAIEX point-drop day ever recorded",
+   "src": "TWSE",
+   "read": "Exactly the low-beta ballast behavior it's on the list for — held the 30.65-31.85 zone without a test.",
+   "url": "https://tw.stock.yahoo.com/quote/1307.TW"
   },
   {
-   "d": "2026-07-06",
-   "t": "Stock falls 7.4% to 33.15, breaking the Jun 30 MSL (33.85); held up on 07-07 (-0.45%) while the tech tape crashed",
-   "src": "scan note",
-   "read": "The original break was newsless — likely TW-tape volatility — but the follow-through breaks make it look like distribution, not noise."
-  },
-  {
-   "d": "profile",
-   "t": "San Fang 三芳化學: PU synthetic leather, films & elastic fibers for footwear/apparel supply chains",
-   "src": "Yahoo Finance profile",
-   "read": "Sporting-goods materials supplier — your list's diversifier away from AI/rates beta.",
-   "url": "https://finance.yahoo.com/quote/1307.TW/"
+   "d": "2026-07-15",
+   "t": "Quiet green week inside the range: 32.35 → 32.5 → 32.4 → 32.7 before Friday's dip — zero participation in the memory melt-up or crash",
+   "src": "TWSE",
+   "read": "Uncorrelated with the sector drama in both directions; the 31.95-33.0 resistance band is still the lid.",
+   "url": "https://tw.stock.yahoo.com/quote/1307.TW"
   }
  ],
  "SPCX": [
   {
-   "d": "2026-07-10",
-   "t": "Closes 145.34 (-4.48%, high 150.57, low 145.25) — gives back the entire 07-09 bounce, closing right on top of 07-08's all-time-low wick (145.20); no fresh negative headline, the launch-news catalyst simply faded",
-   "src": "scan note",
-   "read": "The 07-09 'breakdown negated' call didn't hold. Third retest of the same low in three sessions — treating this as genuinely neutral now rather than calling a direction."
+   "d": "2026-07-17",
+   "t": "SPCX -5.43% to 123.99 (low 122.12) after SpaceX delays the flagship Starship launch — fifth straight down day, ~45% below the $225 post-IPO high",
+   "src": "Benzinga / StartupHub",
+   "read": "Every IPO buyer is now underwater with the Aug 6 earnings + lockup double event three weeks out — sentiment damage compounding daily.",
+   "url": "https://www.benzinga.com/trading-ideas/movers/26/07/60481036/spacex-spcx-stock-falls-below-135-ipo-price"
   },
   {
-   "d": "2026-07-09",
-   "t": "Closes 153.16 (+3.28%), reversing off Wednesday's ATL close (148.30, intraday low 145.20) and reclaiming the 147.11 MSL / 148 alert level on a record 36th Falcon-9 booster reuse and a 29-satellite Starlink launch",
-   "src": "scan note / Yahoo Finance",
-   "read": "Sharp bounce that didn't survive a second session — see 07-10.",
-   "url": "https://finance.yahoo.com/markets/stocks/article/spacex-stock-in-focus-as-launch-starlink-business-hit-new-milestones-153225745.html"
+   "d": "2026-07-16",
+   "t": "First-ever close below the $135 IPO price (131.11), after Wednesday's intraday break — one month and four days after the largest IPO in US history",
+   "src": "Yahoo Finance / Motley Fool",
+   "read": "Broken-IPO territory changes the holder base math: the $75B raised at $135 is now everyone's overhead supply.",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-stock-closes-below-ipo-200159927.html"
   },
   {
-   "d": "2026-07-08",
-   "t": "SPCX closes 148.30 (an all-time-low close, intraday low $145.20), below the 147.11 MSL — stock under its $150 day-one open",
-   "src": "scan note",
-   "read": "This level has now been tested three times (07-08, 07-09 low, 07-10 close) without a clean break either way."
+   "d": "2026-07-13",
+   "t": "Underwriter quiet period ends — coverage wave lands: Morgan Stanley Overweight $300, Raymond James Strong Buy $800 (Jul 7), CFRA $115 low; consensus ~$240 across ~30 analysts",
+   "src": "Seeking Alpha / Motley Fool",
+   "read": "A ~95% gap between consensus and spot is extreme even for a broken IPO — the Street is effectively all-in ahead of numbers nobody has seen.",
+   "url": "https://seekingalpha.com/news/4611831-morgan-stanley-buys-into-spacexs-ai-future-with-new-overweight-rating"
   },
   {
-   "d": "2026-07-08",
-   "t": "Colossus 2 data center faces court-ordered shutdown of gas turbines operating without permits — litigation threatens portions of the $45B Anthropic compute contract",
+   "d": "2026-07-14",
+   "t": "Nasdaq-100 inclusion analysis: ~$4.3B of forced passive buying against a ~3% float",
    "src": "TradingKey",
-   "read": "First real fundamental crack (vs pure flow mechanics): the Anthropic deal was a headline pillar of the AI-infrastructure story in the IPO narrative. Still unresolved.",
-   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262016462-spacex-colossus2-data-center-anthropic-deal-nasdaq-100-tradingkey"
+   "read": "The main squeeze mechanic on the bear side — small float plus forced indexation can produce violent counter-trend rallies from oversold.",
+   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262011296-spacex-spcx-stock-forecast-july-2026-nasdaq-100-inclusion-tradingkey"
   },
   {
-   "d": "2026-08-06",
-   "t": "Aug 6 confirmed: first public earnings + first lockup expiration (~20% of insiders can sell; another 10% if IPO-price conditions met); Shotwell also plans share gifts to 2M+ children via 'Trump Accounts'",
-   "src": "TradingKey / Motley Fool",
-   "read": "The supply event that has dominated the tape since inclusion day — clearing it (or a Starlink beat) is the setup for the analyst-PT gap to matter.",
-   "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262016028-spacex-spcx-stock-forecast-july-2026-nasdaq-100-palantir-comparison-tradingkey"
-  },
-  {
-   "d": "2026-06-12",
-   "t": "SpaceX IPO: biggest in history — $135/share, $75B raised, $1.75T valuation; closed +19% at $161 on day one",
-   "src": "CNBC",
-   "read": "Day-one: $135 IPO → $150 open → $176.5 high → $161 close. Now trading well below the day-one open.",
-   "url": "https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html"
+   "d": "2026-07-15",
+   "t": "Bear focus shifts to Starlink ARPU: $99 (FY2023) → $66 (Q1 2026) even as subscribers reportedly hit 10M",
+   "src": "Yahoo Finance",
+   "read": "The only profitable segment is growing units while shrinking unit economics — Aug 6 is the first time anyone sees the real mix.",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-stock-closes-below-ipo-200159927.html"
   }
  ],
  "AAPL": [
   {
-   "d": "2026-07-10",
-   "t": "Stock closes 315.14 (-0.34%, high 316.91, low 312.17) — first down close in five sessions, a shallow digestion pause rather than a reversal, still ~4.2% above the old 302.42 MSH pivot",
-   "src": "scan note",
-   "read": "No negative catalyst behind the dip. Incoming CEO Ternus gave his first extended AI comments this week: 'technology exists to serve the product' — measured, un-hyped framing."
+   "d": "2026-07-17",
+   "t": "AAPL +0.14% to a record 333.74 — the only green megacap through the semi rout; July +15%, tracking its best month in ~4 years; market cap $4.66T",
+   "src": "Stocktwits / BigGo",
+   "read": "The 'AI-lite haven' trade in full effect: money fleeing AI-capex exposure is parking in the one megacap that never overspent.",
+   "url": "https://finance.biggo.com/news/7c70b605-0dbc-418f-83c8-858315f28238"
   },
   {
-   "d": "2026-07-09",
-   "t": "Stock closes 314.71 (+0.42%), another incremental recovery high extending the Broadcom-deal momentum — no fresh company catalyst, pure continuation",
-   "src": "scan note",
-   "read": "Fourth straight up day off the Cook/Broadcom headline before Jul 10's pause. Calibration flags I keep guessing too low on this name."
+   "d": "2026-07-15",
+   "t": "Breakout extends: 327.5 (+4.0%) then 333.26 — records on consecutive sessions on heavy volume",
+   "src": "The Motley Fool",
+   "read": "The 07-15 base at ~317 is now the momentum invalidation level; five straight up days is stretched but sponsored.",
+   "url": "https://www.fool.com/investing/2026/07/15/why-apple-stock-climbed-to-new-all-time-high-today/"
   },
   {
-   "d": "2026-07-08",
-   "t": "Cook's final move as CEO: $30B+ multi-year US chip deal with Broadcom — 15B+ US-made chips, $1.5B Fort Collins fab expansion; stock +1.04% to a fresh recovery high $313.89",
-   "src": "24/7 Wall St",
-   "read": "Biggest domestic manufacturing commitment in Apple history — political tailwind + supply-chain security, and a clean handoff narrative into the Sep 1 Ternus era.",
-   "url": "https://247wallst.com/investing/2026/07/08/tim-cooks-final-move-as-apple-ceo-the-biggest-american-manufacturing-deal-in-company-history/"
+   "d": "2026-07-14",
+   "t": "China's cyberspace regulator approves Apple Intelligence for the Chinese market, running on Baidu/Alibaba models",
+   "src": "MacRumors / FX Leaders",
+   "read": "The single biggest fundamental unlock of the month — China was the missing region in the AI-features story and a direct iPhone-upgrade-cycle lever.",
+   "url": "https://www.macrumors.com/2026/07/13/apple-stock-record-territory/"
   },
   {
-   "d": "2026-07-08",
-   "t": "Fiscal Q3 earnings confirmed for Jul 30 — one of Cook's final calls before the transition; Street focus on AI monetization and iPhone demand",
-   "src": "TipRanks",
-   "read": "Moved from the Jul 28 estimate. Post-WWDC narrative has flipped to 'gatekeeper of consumer AI' — the print has to validate a rich re-rating.",
-   "url": "https://www.tipranks.com/news/apple-aapl-stock-heads-into-fiscal-q3-with-ai-upside-in-focus"
+   "d": "2026-07-13",
+   "t": "iOS 27 public betas ship with Siri AI beta; Gene Munster: 'like having a new phone'; Ming-Chi Kuo says the rally was expected",
+   "src": "Yahoo Finance",
+   "read": "First hands-on validation that the on-device AI strategy produces a felt product difference — exactly Ternus's 'technology serves the product' framing.",
+   "url": "https://finance.yahoo.com/technology/ai/articles/gene-munster-says-siri-ai-133021829.html"
   },
   {
-   "d": "2026-07-02",
-   "t": "Apple drops its 7-year 'net cash neutral' policy — frees incoming CEO Ternus to invest more aggressively in AI infrastructure and M&A",
-   "src": "TheNextWeb",
-   "read": "A capital-allocation signal the market read as bullish — Ternus gets a real war chest instead of pure buyback/dividend discipline.",
-   "url": "https://thenextweb.com/news/apple-ternus-ceo-buyback-cash-strategy"
-  },
-  {
-   "d": "2026-04-20",
-   "t": "Tim Cook to become Executive Chairman; John Ternus named CEO effective September 1, 2026",
-   "src": "Apple Newsroom",
-   "read": "Succession confirmed. Ternus is a hardware-first choice — his AI monetization stance is the open question the Jul 30 call previews.",
-   "url": "https://www.apple.com/newsroom/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo/"
+   "d": "2026-07-14",
+   "t": "Citi raises target to $365; HSBC sees another 10% upside — Street chasing the re-rating",
+   "src": "FX Leaders / Stocktwits",
+   "read": "Targets are following price, not leading it; the Jul 30 earnings call (one of Cook's last) has to convert narrative into iPhone demand numbers.",
+   "url": "https://www.fxleaders.com/news/2026/07/14/aapl-stock-tests-record-highs-as-apple-ai-strategy-and-citis-365-target-fuel-breakout/"
   }
  ]
 };

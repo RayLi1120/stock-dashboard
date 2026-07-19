@@ -7,38 +7,39 @@
  },
  "levels": {
   "2344": {
-   "above": 184,
-   "below": 165,
-   "why": "184 = 07-08 high / reclaim of the 07-07 gap-down open; 165 = 07-08 low, losing it negates the 07-09 reversal"
+   "above": 165,
+   "below": 150,
+   "why": "165 = the old July low / broken support, reclaiming it kills the post-crash bear case; 150 = under the 07-17 crash close, losing it opens air to the 136.5 zone top"
   },
   "2337": {
-   "below": 135,
-   "why": "135 = the old MSL, now reclaimed with room after 07-09's follow-through close at 143.5 — a close back below it undoes the whole recovery, tighter than the prior 133 wick-based level"
+   "below": 120,
+   "above": 136.5,
+   "why": "136.5 = top of the broken 132.5-136.5 MSL/resistance band, reclaiming it restores the recovery case; 120 = below the 07-17 low, confirms free-fall with no volume support beneath"
   },
   "6770": {
-   "below": 66,
+   "below": 63,
    "above": 75,
-   "why": "66 = breakdown of the 66.5-70.7 volume zone; 75 = reclaim of last week's shelf, bounce confirmed"
+   "why": "63 = breaks the 63.4 July MSL, nothing beneath until the 56.6-59.1 zone; 75 = back into the post-earnings-call range, says the crash was the flush and the earnings story reasserts"
   },
   "NVDA": {
-   "below": 204,
+   "below": 198,
    "above": 214,
-   "why": "204 = 07-10 breakout day's shelf, losing it undoes the move; 214 = clears the 213.99 MSH, opens the 216.8 zone top"
+   "why": "198 = under the 188.9-197.6 zone top that caught Friday's low to the tick — losing it turns the failed breakout into a short setup; 214 = clears the 213.99 MSH, opens the 216.8 zone top"
   },
   "1307": {
    "above": 34.0,
    "below": 31.5,
-   "why": "34.0 = reclaim of the broken MSL (33.85); 31.5 = decisively inside the 30.9-32.3 zone, trend flip confirmed"
+   "why": "34.0 = reclaim of the broken MSL (33.85); 31.5 = decisively inside the 30.65-31.85 zone, trend flip confirmed"
   },
   "AAPL": {
-   "below": 302,
-   "above": 318,
-   "why": "302 = old MSH, now the breakout invalidation pivot; 318 = extension above this week's high"
+   "below": 318,
+   "above": 335,
+   "why": "318 = under the 07-15 breakout base (~317), ends the five-day momentum leg; 335 = extension above the 334.99 weekly high into fresh record territory"
   },
   "SPCX": {
-   "below": 143,
-   "above": 150,
-   "why": "143 = below the 145.20-145.34 zone being retested right now, opens fresh air toward the $135 IPO floor; 150 = the day-one open, reclaiming it restores the post-bounce bull case"
+   "below": 120,
+   "above": 135,
+   "why": "120 = under the 07-17 low (122.12), opens the low-110s with only round numbers beneath; 135 = reclaim of the IPO price, flips the broken-IPO read back to neutral"
   }
  }
 }

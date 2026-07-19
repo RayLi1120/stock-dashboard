@@ -1,6 +1,6 @@
 // Machine-managed prediction scorecard. Strict JSON body — written by grade_predictions.py.
 const SCORECARD = {
- "generated": "2026-07-10 22:00",
+ "generated": "2026-07-19 16:08",
  "entries": [
   {
    "sym": "2344",
@@ -489,6 +489,104 @@ const SCORECARD = {
    "actualDate": "07-10",
    "actualC": 145.34,
    "actualPct": -5.11,
+   "dirHit": false,
+   "inRange": false
+  },
+  {
+   "sym": "2344",
+   "baseDate": "07-09",
+   "madeAt": "2026-07-10 23:05",
+   "predDir": "up",
+   "predC": 178.49,
+   "predL": 170.08,
+   "predH": 184.07,
+   "actualDate": "07-10",
+   "actualC": 176.5,
+   "actualPct": 0.0,
+   "dirHit": false,
+   "inRange": true
+  },
+  {
+   "sym": "2337",
+   "baseDate": "07-09",
+   "madeAt": "2026-07-10 23:05",
+   "predDir": "up",
+   "predC": 145.39,
+   "predL": 140.53,
+   "predH": 148.45,
+   "actualDate": "07-10",
+   "actualC": 143.5,
+   "actualPct": 0.0,
+   "dirHit": false,
+   "inRange": true
+  },
+  {
+   "sym": "6770",
+   "baseDate": "07-09",
+   "madeAt": "2026-07-10 23:05",
+   "predDir": "neutral",
+   "predC": 71.28,
+   "predL": 69.68,
+   "predH": 73.23,
+   "actualDate": "07-10",
+   "actualC": 71.1,
+   "actualPct": 0.0,
+   "dirHit": true,
+   "inRange": true
+  },
+  {
+   "sym": "1307",
+   "baseDate": "07-09",
+   "madeAt": "2026-07-10 23:05",
+   "predDir": "neutral",
+   "predC": 32.11,
+   "predL": 31.74,
+   "predH": 32.42,
+   "actualDate": "07-10",
+   "actualC": 32.15,
+   "actualPct": 0.0,
+   "dirHit": true,
+   "inRange": true
+  },
+  {
+   "sym": "NVDA",
+   "baseDate": "07-10",
+   "madeAt": "2026-07-10 23:05",
+   "predDir": "up",
+   "predC": 213.44,
+   "predL": 206.4,
+   "predH": 218.03,
+   "actualDate": "07-13",
+   "actualC": 203.53,
+   "actualPct": -3.43,
+   "dirHit": false,
+   "inRange": false
+  },
+  {
+   "sym": "AAPL",
+   "baseDate": "07-10",
+   "madeAt": "2026-07-10 23:05",
+   "predDir": "up",
+   "predC": 317.03,
+   "predL": 308.96,
+   "predH": 323.11,
+   "actualDate": "07-13",
+   "actualC": 317.31,
+   "actualPct": 0.69,
+   "dirHit": true,
+   "inRange": true
+  },
+  {
+   "sym": "SPCX",
+   "baseDate": "07-10",
+   "madeAt": "2026-07-10 23:05",
+   "predDir": "neutral",
+   "predC": 145.25,
+   "predL": 139.67,
+   "predH": 149.12,
+   "actualDate": "07-13",
+   "actualC": 139.14,
+   "actualPct": -4.27,
    "dirHit": false,
    "inRange": false
   }
