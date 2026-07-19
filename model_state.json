@@ -6,21 +6,32 @@
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
-    "d": "2026-06-28",
-    "dirAcc": 80,
-    "mae": 4.64
+    "d": "2026-07-19",
+    "dirAcc": 40,
+    "mae": 2.96
    }
   },
   "2337": {
-   "variant": "v1_base",
-   "mae": 4.86,
-   "version": 0,
-   "evolvedAt": "2026-06-17",
+   "variant": "v4_long",
+   "mae": 4.71,
+   "version": 1,
+   "evolvedAt": "2026-07-12",
    "weekReview": {
-    "d": "2026-06-28",
-    "dirAcc": 100,
-    "mae": 4.04
-   }
+    "d": "2026-07-19",
+    "dirAcc": 40,
+    "mae": 2.16
+   },
+   "log": [
+    {
+     "d": "2026-07-12",
+     "sym": "2337",
+     "from": "v1_base",
+     "to": "v4_long",
+     "maeFrom": 4.86,
+     "maeTo": 4.71,
+     "trigger": "weekend"
+    }
+   ]
   },
   "6770": {
    "variant": "v1_base",
@@ -28,9 +39,9 @@
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
-    "d": "2026-06-28",
+    "d": "2026-07-19",
     "dirAcc": 40,
-    "mae": 3.14
+    "mae": 1.78
    }
   },
   "1307": {
@@ -39,9 +50,9 @@
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
-    "d": "2026-06-28",
-    "dirAcc": 80,
-    "mae": 1.88
+    "d": "2026-07-19",
+    "dirAcc": 60,
+    "mae": 2.74
    }
   },
   "NVDA": {
@@ -61,9 +72,9 @@
     }
    ],
    "weekReview": {
-    "d": "2026-06-28",
+    "d": "2026-07-19",
     "dirAcc": 60,
-    "mae": 2.4
+    "mae": 1.85
    }
   },
   "AAPL": {
@@ -72,9 +83,9 @@
    "version": 0,
    "evolvedAt": "2026-06-17",
    "weekReview": {
-    "d": "2026-06-28",
-    "dirAcc": 60,
-    "mae": 1.2
+    "d": "2026-07-19",
+    "dirAcc": 80,
+    "mae": 0.67
    }
   }
  },
@@ -87,7 +98,16 @@
    "maeFrom": 1.96,
    "maeTo": 1.89,
    "trigger": "weekend"
+  },
+  {
+   "d": "2026-07-12",
+   "sym": "2337",
+   "from": "v1_base",
+   "to": "v4_long",
+   "maeFrom": 4.86,
+   "maeTo": 4.71,
+   "trigger": "weekend"
   }
  ],
- "lastEvolve": "2026-07-10"
+ "lastEvolve": "2026-07-19"
 }
