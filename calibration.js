@@ -1,7 +1,7 @@
 // Machine-managed prediction calibration. Strict JSON body — written by calibrate.py.
 // The scan reads this and applies closeBiasAdj / rangeMult to the next guesses.
 const CALIBRATION = {
- "generated": "2026-07-19 16:08",
+ "generated": "2026-07-20 09:43",
  "minN": 3,
  "rangeTarget": 70,
  "global": {
